@@ -24,7 +24,7 @@ $csv = file_get_contents(
 file_put_contents($csvfile.'.gz', $csv);
 
 //Uncompress data
-echo 'Uncompressiing data…'.PHP_EOL;
+echo 'Uncompressing data…'.PHP_EOL;
 $gzip = gzopen($csvfile.'.gz', 'r');
 file_put_contents($csvfile, gzread($gzip, filesize($csvfile.'.gz')));
 gzclose($gzip);
