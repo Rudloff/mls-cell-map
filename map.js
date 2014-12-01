@@ -54,7 +54,7 @@ function init() {
     map = L.map('map',  { minZoom: 11 }).setView([48.57457, 7.75875], 13);
     L.control.locate().addTo(map);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>'
     }).addTo(map);
     markers = new L.MarkerClusterGroup().addTo(map);
