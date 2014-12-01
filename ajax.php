@@ -37,7 +37,7 @@ foreach ($cells as $cell) {
         'type'=>'Feature',
         "geometry"=>array(
             "type"=>"Point",
-            "coordinates"=>[$cell['lon'], $cell['lat']]
+            "coordinates"=>array($cell['lon'], $cell['lat'])
         ),
         'properties'=>array(
             'radio'=>$cell['radio'],
