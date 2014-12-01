@@ -1,0 +1,18 @@
+{
+  "name": "mls-cell-map",
+  "version": "0.1",
+  "homepage": "https://carto.rudloff.pro/gsm/",
+  "description": "GSM cells map using Mozilla Location Service data",
+  "authors": [
+    "Pierre Rudloff"
+  ],
+  "license": "GPL",
+  "dependencies": {
+    "Leaflet.awesome-markers": "~2.0.2",
+    "leaflet.markercluster": "~0.4.0",
+    "leaflet": "~0.7.3",
+    "font-awesome": "~4.2.0",
+    "ionicons": "~1.5.2",
+    "leaflet.locatecontrol": "~0.34.0"
+  }
+}
