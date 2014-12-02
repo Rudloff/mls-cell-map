@@ -64,7 +64,7 @@ function init() {
     L.control.locate().addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="https://location.services.mozilla.com/">Mozilla Location Service</a>'
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="https://location.services.mozilla.com/">Mozilla Location Service</a> | <a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'
     }).addTo(map);
     markers = new L.MarkerClusterGroup().addTo(map);
     map.on('moveend', getMarkers);
