@@ -59,6 +59,7 @@ function init() {
     markers = new L.MarkerClusterGroup().addTo(map);
     map.on('moveend', getMarkers);
     getMarkers();
+    map.addControl(new L.Control.Geocoder({ collapsed: false, geocoder: new L.Control.Geocoder.Nominatim({ serviceUrl: 'https://nominatim.openstreetmap.org/' }) }));
 }
 
 window.addEventListener('load', init, false);

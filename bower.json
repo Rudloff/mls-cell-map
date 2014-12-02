@@ -13,6 +13,7 @@
     "leaflet": "~0.7.3",
     "font-awesome": "~4.2.0",
     "ionicons": "~1.5.2",
-    "leaflet.locatecontrol": "~0.34.0"
+    "leaflet.locatecontrol": "~0.34.0",
+    "leaflet-control-geocoder": "~0.2.1"
   }
 }
