@@ -26,7 +26,11 @@ file_put_contents($csvfile.'.gz', $csv);
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
 $gzip = gzopen($csvfile.'.gz', 'r');
-file_put_contents($csvfile, gzread($gzip, filesize($csvfile.'.gz')));
+$csv = '';
+while (!gzeof($gzip)) {
+    $csv .= gzread($gzip, 4096);
+}
+file_put_contents($csvfile, $csv);
 gzclose($gzip);
 
 //PDO
