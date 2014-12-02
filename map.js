@@ -1,10 +1,19 @@
 /*global L*/
 /*jslint browser: true*/
-var map, markers;
+var map, markers, circle;
+
+function displayCircle(e) {
+    'use strict';
+    if (circle) {
+        map.removeLayer(circle);
+    }
+    circle = L.circle(e.target.getLatLng(), e.target.feature.properties.range);
+    circle.addTo(map);
+}
 
 function showPopup(feature, layer) {
     'use strict';
-    var color, network;
+    var color;
     if (feature.properties.mcc === '208') {
         switch (Number(feature.properties.net)) {
         case 1:
@@ -29,6 +38,7 @@ function showPopup(feature, layer) {
     layer.options.icon = L.AwesomeMarkers.icon({
         markerColor: color
     });
+    layer.on('click', displayCircle);
 }
 
 function showMarkers(e) {
