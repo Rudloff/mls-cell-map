@@ -17,20 +17,17 @@ $csvfile = 'data/MLS-full-cell-export.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
-$gzipcsv = file_get_contents(
+$csv = file_get_contents(
     'https://d17pt8qph6ncyq.cloudfront.net/export/'.
     'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz'
 );
-file_put_contents($csvfile.'.gz', $gzipcsv);
+file_put_contents($csvfile.'.gz', $csv);
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
-$gzip = gzfile($csvfile.'.gz');
-$csv = '';
-foreach ($gzip as $line) {
-    $csv .= $line;
-}
-file_put_contents($csvfile, $csv);
+$gzip = gzopen($csvfile.'.gz', 'r');
+file_put_contents($csvfile, gzread($gzip, filesize($csvfile.'.gz')));
+gzclose($gzip);
 
 //PDO
 $pdo = new PDO('mysql:dbname='.DBNAME.';host=localhost', DBUSER, DBPASS);
