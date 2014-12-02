@@ -33,6 +33,23 @@ $query->execute(
 $cells = $query->fetchAll(PDO::FETCH_ASSOC);
 $output = array();
 foreach ($cells as $cell) {
+    if ($cell['net'] < 10) {
+        $mnc = '0'.$cell['net'];
+    } else {
+        $mnc = $cell['net'];
+    }
+    $query = $pdo->prepare(
+        "SELECT Network, Country
+        FROM cells_mnc
+        WHERE `MCC` = :mcc AND `MNC` = :mnc"
+    );
+    $query->execute(
+        array(
+            ':mcc'=>$cell['mcc'],
+            ':mnc'=>$mnc
+        )
+    );
+    $network = $query->fetch(PDO::FETCH_ASSOC);
     $output[] = array(
         'type'=>'Feature',
         "geometry"=>array(
@@ -45,7 +62,9 @@ foreach ($cells as $cell) {
             'net'=>$cell['net'],
             'cell'=>$cell['cell'],
             'area'=>$cell['area'],
-            'samples'=>$cell['samples']
+            'samples'=>$cell['samples'],
+            'country'=>$network['Country'],
+            'operator'=>$network['Network']
         )
     );
 }

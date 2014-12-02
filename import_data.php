@@ -14,6 +14,7 @@ require_once 'config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 $csvfile = 'data/MLS-full-cell-export.csv';
+$mncfile = 'data/mnc.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
@@ -22,6 +23,11 @@ $csv = file_get_contents(
     'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz'
 );
 file_put_contents($csvfile.'.gz', $csv);
+$mnc = file_get_contents(
+    'https://raw.githubusercontent.com/Rudloff/'.
+    'mcc-mnc-table/master/mcc-mnc-table.csv'
+);
+file_put_contents($mncfile, $mnc);
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
@@ -47,15 +53,20 @@ $query->execute();
 //Empty tables
 echo 'Emptying tables…'.PHP_EOL;
 $query = $pdo->prepare(
-    "DELETE FROM `cells`;"
+    "DELETE FROM `cells`;
+    DELETE FROM `cells_mnc`;"
 );
 $query->execute();
 
 //Load CSV files
 echo 'Importing data…'.PHP_EOL;
 $query = $pdo->prepare(
-    "LOAD DATA INFILE '".__DIR__."/data/MLS-full-cell-export.csv'
+    "LOAD DATA INFILE '".__DIR__."/".$csvfile."'
     INTO TABLE `cells`
+    FIELDS TERMINATED BY ','
+    IGNORE 1 LINES;
+    LOAD DATA INFILE '".__DIR__."/".$mncfile."'
+    INTO TABLE `cells_mnc`
     FIELDS TERMINATED BY ','
     IGNORE 1 LINES;"
 );

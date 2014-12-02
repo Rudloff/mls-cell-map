@@ -5,28 +5,27 @@ var map, markers;
 function showPopup(feature, layer) {
     'use strict';
     var color, network;
-    switch (Number(feature.properties.net)) {
-    case 1:
-        color = 'orange';
-        network = 'Orange';
-        break;
-    case 15:
-        color = 'black';
-        network = 'Free';
-        break;
-    case 10:
-        color = 'red';
-        network = 'SFR';
-        break;
-    case 20:
-        color = 'blue';
-        network = 'Bouygues';
-        break;
-    default:
+    if (feature.properties.mcc === '208') {
+        switch (Number(feature.properties.net)) {
+        case 1:
+            color = 'orange';
+            break;
+        case 15:
+            color = 'black';
+            break;
+        case 10:
+            color = 'red';
+            break;
+        case 20:
+            color = 'blue';
+            break;
+        default:
+            color = 'white';
+        }
+    } else {
         color = 'white';
-        network = 'Unknown';
     }
-    layer.bindPopup('<b>CID</b>: ' + feature.properties.cell + '<br/><b>MNC</b>: ' + feature.properties.net + '<br/><b>MCC</b>: ' + feature.properties.mcc + '<br/><b>LAC</b>: ' + feature.properties.area + '<br/><b>Operator</b>: ' + network + '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[0] + '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] + '<br/><br/><i>' + feature.properties.samples + '</i> measurements', { autoPan: false });
+    layer.bindPopup('<b>CID</b>: ' + feature.properties.cell + '<br/><b>MNC</b>: ' + feature.properties.net + '<br/><b>MCC</b>: ' + feature.properties.mcc + '<br/><b>LAC</b>: ' + feature.properties.area + '<br/><b>Operator</b>: ' + feature.properties.operator + '<br/><b>Country</b>: ' + feature.properties.country + '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[0] + '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] + '<br/><br/><i>' + feature.properties.samples + '</i> measurements', { autoPan: false });
     layer.options.icon = L.AwesomeMarkers.icon({
         markerColor: color
     });
