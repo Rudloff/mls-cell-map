@@ -43,18 +43,18 @@ gzclose($gzip);
 $pdo = new PDO('mysql:dbname='.DBNAME.';host=localhost', DBUSER, DBPASS);
 $pdo->exec("SET NAMES 'utf8';");
 
+//Delete tables
+echo 'Deleting tables…'.PHP_EOL;
+$query = $pdo->prepare(
+    "DROP TABLE `cells`;
+    DROP TABLE `cells_mnc`;"
+);
+$query->execute();
+
 //Create tables
 echo 'Creating tables…'.PHP_EOL;
 $query = $pdo->prepare(
     file_get_contents('create_tables.sql')
-);
-$query->execute();
-
-//Empty tables
-echo 'Emptying tables…'.PHP_EOL;
-$query = $pdo->prepare(
-    "DELETE FROM `cells`;
-    DELETE FROM `cells_mnc`;"
 );
 $query->execute();
 
