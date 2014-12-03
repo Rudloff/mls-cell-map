@@ -1,6 +1,6 @@
 /*global L*/
 /*jslint browser: true*/
-var map, markers, circle;
+var map, markers, circle, httpRequest = new XMLHttpRequest();
 
 function displayCircle(e) {
     'use strict';
@@ -52,7 +52,6 @@ function showMarkers(e) {
 
 function getMarkers() {
     'use strict';
-    var httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = showMarkers;
     httpRequest.open('GET', 'ajax.php?bbox=' + map.getBounds().toBBoxString(), true);
     httpRequest.send(null);
