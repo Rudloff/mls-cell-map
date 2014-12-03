@@ -31,7 +31,8 @@ $query->execute(
     )
 );
 $cells = $query->fetchAll(PDO::FETCH_ASSOC);
-$output = array();
+$output = array('type'=>'FeatureCollection');
+$features = array();
 foreach ($cells as $cell) {
     if ($cell['net'] < 10) {
         $mnc = '0'.$cell['net'];
@@ -50,11 +51,11 @@ foreach ($cells as $cell) {
         )
     );
     $network = $query->fetch(PDO::FETCH_ASSOC);
-    $output[] = array(
+    $features[] = array(
         'type'=>'Feature',
         "geometry"=>array(
             "type"=>"Point",
-            "coordinates"=>array($cell['lon'], $cell['lat'])
+            "coordinates"=>array(floatval($cell['lon']), floatval($cell['lat']))
         ),
         'properties'=>array(
             'radio'=>$cell['radio'],
@@ -69,5 +70,6 @@ foreach ($cells as $cell) {
         )
     );
 }
+$output['features'] = $features;
 echo json_encode($output);
 ?>
