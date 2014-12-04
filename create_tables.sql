@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS `cells` (
   `created` int(10) DEFAULT NULL,
   `updated` int(10) DEFAULT NULL,
   `averageSignal` varchar(10) DEFAULT NULL,
-  KEY (`cell`)
+  KEY (`cell`),
+  KEY `coords` (`lon`,`lat`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cells_mnc` (
