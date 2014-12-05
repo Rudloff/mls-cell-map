@@ -18,13 +18,14 @@ CREATE TABLE IF NOT EXISTS `cells` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `cells_mnc` (
-  `MCC` int(3) DEFAULT NULL,
-  `MCC (int)` int(4) DEFAULT NULL,
-  `MNC` varchar(3) DEFAULT NULL,
-  `MNC (int)` int(4) DEFAULT NULL,
-  `ISO` varchar(3) DEFAULT NULL,
-  `Country` varchar(33) DEFAULT NULL,
-  `Country Code` int(4) DEFAULT NULL,
-  `Network` varchar(72) DEFAULT NULL,
+  `MCC` smallint(3) unsigned NOT NULL,
+  `MNC` smallint(3) unsigned NOT NULL,
+  `Network` text NOT NULL,
   KEY `MCC+MNC` (`MCC`,`MNC`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `cells_country` (
+  `MCC` smallint(3) unsigned NOT NULL,
+  `Country` varchar(255) NOT NULL,
+  KEY `MCC` (`MCC`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -14,7 +14,6 @@ require_once 'config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 $csvfile = 'data/MLS-full-cell-export.csv';
-$mncfile = 'data/mnc.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
@@ -27,7 +26,6 @@ $mnc = file_get_contents(
     'https://raw.githubusercontent.com/Rudloff/'.
     'mcc-mnc-table/master/mcc-mnc-table.csv'
 );
-file_put_contents($mncfile, $mnc);
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
@@ -47,7 +45,8 @@ $pdo->exec("SET NAMES 'utf8';");
 echo 'Deleting tables…'.PHP_EOL;
 $query = $pdo->prepare(
     "DROP TABLE `cells`;
-    DROP TABLE `cells_mnc`;"
+    DROP TABLE `cells_mnc`;
+    DROP TABLE `cells_country`;"
 );
 $query->execute();
 
@@ -64,13 +63,59 @@ $query = $pdo->prepare(
     "LOAD DATA INFILE '".__DIR__."/".$csvfile."'
     INTO TABLE `cells`
     FIELDS TERMINATED BY ','
-    IGNORE 1 LINES;
-    LOAD DATA INFILE '".__DIR__."/".$mncfile."'
-    INTO TABLE `cells_mnc`
-    FIELDS TERMINATED BY ','
     IGNORE 1 LINES;"
 );
 $query->execute();
+
+//Import MNC
+$query = $pdo->prepare(
+    'INSERT INTO cells_mnc (MNC, MCC, Network) VALUES (:mnc, :mcc, :net)'
+);
+$mnclist = json_decode(
+    file_get_contents(
+        'https://raw.githubusercontent.com/andymckay/mobile-codes/master/'.
+        'mobile_codes/json/mnc_operators.json'
+    )
+);
+foreach ($mnclist as $mnc) {
+    $query->execute(
+        array(
+            ':mcc'=>$mnc[0],
+            ':mnc'=>$mnc[1],
+            ':net'=>$mnc[2]
+        )
+    );
+}
+
+//Import MCC
+$query = $pdo->prepare(
+    'INSERT INTO cells_country (MCC, Country) VALUES (:mcc, :country)'
+);
+$mcclist = json_decode(
+    file_get_contents(
+        'https://raw.githubusercontent.com/andymckay/mobile-codes/master/'.
+        'mobile_codes/json/countries.json'
+    )
+);
+foreach ($mcclist as $mcc) {
+    if (is_array($mcc[4])) {
+        foreach ($mcc[4] as $submcc) {
+            $query->execute(
+                array(
+                    ':mcc'=>$submcc,
+                    ':country'=>$mcc[0]
+                )
+            );
+        }
+    } else {
+        $query->execute(
+            array(
+                ':mcc'=>$mcc[4],
+                ':country'=>$mcc[0]
+            )
+        );
+    }
+}
 
 //Done
 echo 'Done!'.PHP_EOL;
