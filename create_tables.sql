@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `cells` (
-  `radio` varchar(3) DEFAULT NULL,
+  `radio` varchar(4) DEFAULT NULL,
   `mcc` int(3) DEFAULT NULL,
   `net` int(1) DEFAULT NULL,
   `area` int(2) DEFAULT NULL,
