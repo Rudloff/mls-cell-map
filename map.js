@@ -34,7 +34,20 @@ function showPopup(feature, layer) {
     } else {
         color = 'white';
     }
-    layer.bindPopup('<b>CID</b>: ' + feature.properties.cell + '<br/><b>MNC</b>: ' + feature.properties.net + '<br/><b>MCC</b>: ' + feature.properties.mcc + '<br/><b>LAC</b>: ' + feature.properties.area + '<br/><b>Operator</b>: ' + feature.properties.operator + '<br/><b>Country</b>: ' + feature.properties.country + '<br/><b>Type</b>: ' + feature.properties.radio + '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[0] + '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] + '<br/><br/><i>' + feature.properties.samples + '</i> measurements' + '</br><b>Created</b>: ' + new Date(feature.properties.created * 1000).toISOString() + '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString(), { autoPan: false });
+    layer.bindPopup('<b>CID</b>: ' + feature.properties.cell +
+        '<br/><b>MNC</b>: ' + feature.properties.net +
+        '<br/><b>MCC</b>: ' + feature.properties.mcc +
+        '<br/><b>LAC</b>: ' + feature.properties.area +
+        '<br/><b>Operator</b>: ' + feature.properties.operator +
+        '<br/><b>Country</b>: ' + feature.properties.country +
+        '<br/><b>Type</b>: ' + feature.properties.radio +
+        '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[0] +
+        '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] +
+        '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] +
+        '<br/><br/><i>' + feature.properties.samples + '</i> measurements' +
+        '</br><b>Created</b>: ' + new Date(feature.properties.created * 1000).toISOString() +
+        '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString(),
+        { autoPan: false });
     layer.options.icon = L.AwesomeMarkers.icon({
         markerColor: color
     });
