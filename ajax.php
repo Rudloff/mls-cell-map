@@ -16,7 +16,7 @@ $pdo = new PDO('mysql:dbname='.DBNAME.';host=localhost', DBUSER, DBPASS);
 $bbox = split(',', $_GET['bbox']);
 
 $query = $pdo->prepare(
-    "SELECT lon, lat, radio, mcc, cell, net, area, samples, `range`
+    "SELECT lon, lat, radio, mcc, cell, net, area, samples, `range`, created, updated
     FROM cells
     WHERE lon > :bb1 AND lon < :bb3
     AND lat > :bb2 AND lat < :bb4
@@ -76,6 +76,8 @@ foreach ($cells as $cell) {
             'area'=>$cell['area'],
             'samples'=>$cell['samples'],
             'range'=>$cell['range'],
+            'created'=>$cell['created'],
+            'updated'=>$cell['updated'],
             'country'=>$country['Country'],
             'operator'=>$network['Network']
         )
