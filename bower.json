@@ -14,6 +14,7 @@
     "font-awesome": "~4.2.0",
     "ionicons": "~1.5.2",
     "leaflet.locatecontrol": "~0.34.0",
+    "leaflet-plugins": "~1.2.1",
     "leaflet-control-geocoder": "~0.2.1"
   }
 }

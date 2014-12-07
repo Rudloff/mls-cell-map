@@ -84,6 +84,7 @@ function init() {
     getMarkers();
     map.addControl(new L.Control.Geocoder({ collapsed: false, geocoder: new L.Control.Geocoder.Nominatim({ serviceUrl: 'https://nominatim.openstreetmap.org/' }) }));
     map.addControl(L.control.scale());
+    map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
 }
 
 window.addEventListener('load', init, false);
