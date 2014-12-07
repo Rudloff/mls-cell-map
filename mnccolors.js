@@ -4,5 +4,11 @@ var mnccolors = {
         10: 'red',
         15: 'black',
         20: 'blue'
+    },
+    262: {
+        1: 'purple',
+        2: 'red',
+        3: 'green',
+        7: 'blue'
     }
 };
