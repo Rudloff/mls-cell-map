@@ -1,4 +1,4 @@
-/*global L*/
+/*global L, mnccolors*/
 /*jslint browser: true*/
 var map, markers, circle, httpRequest = new XMLHttpRequest();
 
@@ -14,23 +14,8 @@ function displayCircle(e) {
 function showPopup(feature, layer) {
     'use strict';
     var color;
-    if (feature.properties.mcc === '208') {
-        switch (Number(feature.properties.net)) {
-        case 1:
-            color = 'orange';
-            break;
-        case 15:
-            color = 'black';
-            break;
-        case 10:
-            color = 'red';
-            break;
-        case 20:
-            color = 'blue';
-            break;
-        default:
-            color = 'white';
-        }
+    if (mnccolors[feature.properties.mcc] && mnccolors[feature.properties.mcc][feature.properties.net]) {
+        color = mnccolors[feature.properties.mcc][feature.properties.net];
     } else {
         color = 'white';
     }
