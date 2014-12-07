@@ -44,6 +44,7 @@ function showPopup(feature, layer) {
         '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[0] +
         '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] +
         '</br><b>Longitude</b>: ' + feature.geometry.coordinates[1] +
+        '</br><b>Range</b>: ' + feature.properties.range + ' m' +
         '<br/><br/><i>' + feature.properties.samples + '</i> measurements' +
         '</br><b>Created</b>: ' + new Date(feature.properties.created * 1000).toISOString() +
         '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString(),
