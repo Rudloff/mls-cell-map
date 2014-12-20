@@ -22,10 +22,6 @@ $csv = file_get_contents(
     'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz'
 );
 file_put_contents($csvfile.'.gz', $csv);
-$mnc = file_get_contents(
-    'https://raw.githubusercontent.com/Rudloff/'.
-    'mcc-mnc-table/master/mcc-mnc-table.csv'
-);
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
