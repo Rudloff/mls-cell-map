@@ -56,32 +56,34 @@ foreach ($cells as $cell) {
         )
     );
     $network = $mncquery->fetch(PDO::FETCH_ASSOC);
-    $mccquery->execute(
-        array(
-            ':mcc'=>$cell['mcc']
-        )
-    );
-    $country = $mccquery->fetch(PDO::FETCH_ASSOC);
-    $features[] = array(
-        'type'=>'Feature',
-        "geometry"=>array(
-            "type"=>"Point",
-            "coordinates"=>array(floatval($cell['lon']), floatval($cell['lat']))
-        ),
-        'properties'=>array(
-            'radio'=>$cell['radio'],
-            'mcc'=>$cell['mcc'],
-            'net'=>$cell['net'],
-            'cell'=>$cell['cell'],
-            'area'=>$cell['area'],
-            'samples'=>$cell['samples'],
-            'range'=>$cell['range'],
-            'created'=>$cell['created'],
-            'updated'=>$cell['updated'],
-            'country'=>$country['Country'],
-            'operator'=>$network['Network']
-        )
-    );
+    if (isset($network['Network'])) {
+        $mccquery->execute(
+            array(
+                ':mcc'=>$cell['mcc']
+            )
+        );
+        $country = $mccquery->fetch(PDO::FETCH_ASSOC);
+        $features[] = array(
+            'type'=>'Feature',
+            "geometry"=>array(
+                "type"=>"Point",
+                "coordinates"=>array(floatval($cell['lon']), floatval($cell['lat']))
+            ),
+            'properties'=>array(
+                'radio'=>$cell['radio'],
+                'mcc'=>$cell['mcc'],
+                'net'=>$cell['net'],
+                'cell'=>$cell['cell'],
+                'area'=>$cell['area'],
+                'samples'=>$cell['samples'],
+                'range'=>$cell['range'],
+                'created'=>$cell['created'],
+                'updated'=>$cell['updated'],
+                'country'=>$country['Country'],
+                'operator'=>$network['Network']
+            )
+        );
+    }
 }
 $output['features'] = $features;
 echo json_encode($output);
