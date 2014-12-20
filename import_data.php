@@ -113,6 +113,10 @@ foreach ($mcclist as $mcc) {
     }
 }
 
+//Timestamp
+echo 'Writing timestamp…'.PHP_EOL;
+file_put_contents('data/timestamp.json', json_encode(new DateTime()).PHP_EOL);
+
 //Done
 echo 'Done!'.PHP_EOL;
 ?>

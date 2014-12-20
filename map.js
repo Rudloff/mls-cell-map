@@ -55,6 +55,22 @@ function getMarkers() {
     httpRequest.send(null);
 }
 
+function showTimestamp(e) {
+    'use strict';
+    if (e.target.readyState === 4 && e.target.status === 200) {
+        var json = JSON.parse(e.target.response);
+        map.attributionControl.addAttribution('(Last update: ' + json.date.substring(0, 10) + ')');
+    }
+}
+
+function getTimestamp() {
+    'use strict';
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = showTimestamp;
+    ajax.open('GET', 'data/timestamp.json');
+    ajax.send(null);
+}
+
 function init() {
     'use strict';
     map = L.map('map',  { minZoom: 11 }).setView([48.57457, 7.75875], 13);
@@ -69,6 +85,7 @@ function init() {
     map.addControl(new L.Control.Geocoder({ collapsed: false, geocoder: new L.Control.Geocoder.Nominatim({ serviceUrl: 'https://nominatim.openstreetmap.org/' }) }));
     map.addControl(L.control.scale());
     map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
+    getTimestamp();
 }
 
 window.addEventListener('load', init, false);
