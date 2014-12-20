@@ -1,0 +1,7 @@
+ExpiresActive on
+ExpiresDefault "access plus 1 day"
+ExpiresByType text/css "access plus 1 week"
+ExpiresByType application/javascript "access plus 1 week"
+ExpiresByType image/png "access plus 1 week"
+SetOutputFilter DEFLATE
+FileETag MTime Size
