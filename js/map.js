@@ -73,13 +73,19 @@ function getTimestamp() {
 
 function init() {
     'use strict';
-    map = L.map('map',  { minZoom: 11 }).setView([48.57457, 7.75875], 13);
+    map = L.map('map',  { minZoom: 11, maxZoom: 18 }).setView([48.57457, 7.75875], 13);
     L.control.locate().addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="https://location.services.mozilla.com/">Mozilla Location Service</a> | <a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'
-    }).addTo(map);
+    }),
+        coverage = L.tileLayer('https://d17pt8qph6ncyq.cloudfront.net/tiles/{z}/{x}/{y}.png', {
+            maxNativeZoom: 13
+        });
     markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 18 }).addTo(map);
+    osm.addTo(map);
+    coverage.addTo(map);
+    L.control.layers({ 'OSM': osm }, { 'Coverage': coverage, 'Cells': markers }).addTo(map);
     map.on('moveend', getMarkers);
     getMarkers();
     map.addControl(new L.Control.Geocoder({ collapsed: false, geocoder: new L.Control.Geocoder.Nominatim({ serviceUrl: 'https://nominatim.openstreetmap.org/' }) }));
