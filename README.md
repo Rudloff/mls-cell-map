@@ -17,6 +17,9 @@ You can contribute to the data by installing one the [client applications](https
     php import_data.php
     bower install
 
+##Layers
+* Cells : estimated position and range of cells, based on collected data
+* Coverage : places where we have data
 
 ##License
 This code is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
