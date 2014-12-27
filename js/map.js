@@ -1,6 +1,6 @@
 /*global L, mnccolors*/
 /*jslint browser: true*/
-var map, markers, circle, httpRequest = new XMLHttpRequest();
+var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [];
 
 function displayCircle(e) {
     'use strict';
@@ -39,12 +39,23 @@ function showPopup(feature, layer) {
     layer.on('click', displayCircle);
 }
 
+function addNewMarkers(feature) {
+    'use strict';
+    if (addedPoints.indexOf(feature.geometry.coordinates[0] + ',' + feature.geometry.coordinates[1]) >= 0) {
+        return false;
+    }
+    addedPoints.push(feature.geometry.coordinates[0] + ',' + feature.geometry.coordinates[1]);
+    return true;
+}
+
 function showMarkers(e) {
     'use strict';
     if (e.target.readyState === 4 && e.target.status === 200) {
-        markers.clearLayers();
-        var cell = JSON.parse(e.target.response);
-        markers.addLayer(L.geoJson(cell, { onEachFeature: showPopup }));
+        var cells = JSON.parse(e.target.response);
+        markers.addLayer(L.geoJson(cells, {
+            onEachFeature: showPopup,
+            filter: addNewMarkers
+        }));
     }
 }
 
