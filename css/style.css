@@ -4,6 +4,16 @@ html, body, .map {
     margin:0;
 }
 
+.leaflet-right .leaflet-bar {
+    width: 27px;
+}
+
+.leaflet-control-layers-toggle {
+    height: 26px;
+    width: 27px;
+    background-size:20px;
+}
+
 @media (max-width: 640px) {
     .leaflet-bottom .leaflet-control-scale {
         margin-bottom: 20px;
