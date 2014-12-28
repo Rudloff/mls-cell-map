@@ -1,10 +1,10 @@
 {
-  "name": "mls-cell-map",
-  "version": "0.1.0",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-contrib-uglify": "^0.6.0",
-    "grunt-contrib-watch": "^0.6.1"
-  }
+    "name": "mls-cell-map",
+    "version": "0.1.0",
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-contrib-cssmin": "^0.10.0",
+        "grunt-contrib-uglify": "^0.6.0",
+        "grunt-contrib-watch": "^0.6.1"
+    }
 }
