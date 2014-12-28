@@ -1,6 +1,6 @@
-/*global L, mnccolors*/
+/*global L, mnccolors, InfoControl*/
 /*jslint browser: true*/
-var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [];
+var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'});
 
 function displayCircle(e) {
     'use strict';
@@ -69,8 +69,9 @@ function getMarkers() {
 function showTimestamp(e) {
     'use strict';
     if (e.target.readyState === 4 && e.target.status === 200) {
-        var json = JSON.parse(e.target.response);
-        map.attributionControl.addAttribution('(Last update: ' + json.date.substring(0, 10) + ')');
+        var json = JSON.parse(e.target.response),
+            container = mapInfo.getContainer();
+        container.innerHTML += ' (Last update: ' + json.date.substring(0, 10) + ')';
     }
 }
 
@@ -139,10 +140,11 @@ function init() {
     }).addTo(map);
 
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, <a href="https://location.services.mozilla.com/">Mozilla Location Service</a> | <a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'
+        attribution: '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }),
         coverage = L.tileLayer('https://d17pt8qph6ncyq.cloudfront.net/tiles/{z}/{x}/{y}.png', {
-            maxNativeZoom: 13
+            maxNativeZoom: 13,
+            attribution: '<a target="_blank"  href="https://location.services.mozilla.com/">Mozilla Location Service</a>'
         });
     markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 18 }).addTo(map);
     osm.addTo(map);
@@ -158,6 +160,7 @@ function init() {
     map.addControl(L.control.scale());
     map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
     map.addControl(new SearchCellControl({position: 'topleft'}));
+    map.addControl(mapInfo);
     getTimestamp();
 }
 
