@@ -62,7 +62,7 @@ function showMarkers(e) {
 function getMarkers() {
     'use strict';
     httpRequest.onreadystatechange = showMarkers;
-    httpRequest.open('GET', 'ajax.php?bbox=' + map.getBounds().toBBoxString(), true);
+    httpRequest.open('GET', 'ajax/getCells.php?bbox=' + map.getBounds().toBBoxString(), true);
     httpRequest.send(null);
 }
 
@@ -81,6 +81,54 @@ function getTimestamp() {
     ajax.open('GET', 'data/timestamp.json');
     ajax.send(null);
 }
+
+function goToCell(e) {
+    'use strict';
+    if (e.target.readyState === 4 && e.target.status === 200) {
+        var cell = JSON.parse(e.target.response);
+        if (cell) {
+            map.setView(cell, 18);
+        }
+    }
+}
+
+var SearchCellControl = L.Control.extend({
+    initialize: function (options) {
+        'use strict';
+        L.Util.setOptions(this, options);
+    },
+    searchCell: function () {
+        'use strict';
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = goToCell;
+        ajax.open('GET', 'ajax/searchCell.php?mcc=' + document.getElementById('mcc').value + '&mnc=' + document.getElementById('mnc').value + '&lac=' + document.getElementById('lac').value + '&cell_id=' + document.getElementById('cell_id').value);
+        ajax.send(null);
+    },
+    onAdd: function () {
+        'use strict';
+        var container = L.DomUtil.create('form', 'search-cell-control'), fields = ['MCC', 'MNC', 'LAC', 'Cell ID'], i, id, field, label, input, br, submitBtn = L.DomUtil.create('button', '');
+        for (i = 0; i < fields.length; i += 1) {
+            id = fields[i].toLowerCase().replace(' ', '_');
+            field = L.DomUtil.create('div', 'cellsearch-line');
+            label = L.DomUtil.create('label', 'cellsearch-label');
+            label.textContent = fields[i];
+            label.setAttribute('for', id);
+            field.appendChild(label);
+            input = L.DomUtil.create('input', 'cellsearch-input');
+            input.setAttribute('type', 'number');
+            input.setAttribute('id', id);
+            field.appendChild(input);
+            br = L.DomUtil.create('br', '');
+            field.appendChild(br);
+            container.appendChild(field);
+        }
+        submitBtn.textContent = 'Search';
+        submitBtn.addEventListener('click', this.searchCell, false);
+        container.appendChild(submitBtn);
+        L.DomEvent.disableClickPropagation(container);
+        return container;
+    }
+});
 
 function init() {
     'use strict';
@@ -109,6 +157,7 @@ function init() {
     }));
     map.addControl(L.control.scale());
     map.addControl(new L.Control.Permalink({ useLocation: true, text: null }));
+    map.addControl(new SearchCellControl({position: 'topleft'}));
     getTimestamp();
 }
 

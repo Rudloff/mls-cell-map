@@ -11,7 +11,7 @@
  * @link     https://carto.rudloff.pro/gsm/
  * */
 header('Content-Type: application/json; charset=UTF-8');
-require_once 'config.php';
+require_once '../config.php';
 $pdo = new PDO('mysql:dbname='.DBNAME.';host=localhost', DBUSER, DBPASS);
 $bbox = split(',', $_GET['bbox']);
 

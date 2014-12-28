@@ -14,6 +14,26 @@ html, body, .map {
     background-size:20px;
 }
 
+.cellsearch-label {
+    width:40px;
+    display:inline-block;
+}
+
+.cellsearch-input {
+    width: 60px;
+}
+
+.cellsearch-line {
+    padding: 0.1em;
+}
+
+.search-cell-control {
+    background: none repeat scroll 0 0 white;
+    border-radius: 4px;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
+    padding: 0.5em;
+}
+
 @media (max-width: 640px) {
     .leaflet-bottom .leaflet-control-scale {
         margin-bottom: 20px;
