@@ -106,7 +106,7 @@ var SearchCellControl = L.Control.extend({
     },
     onAdd: function () {
         'use strict';
-        var container = L.DomUtil.create('form', 'search-cell-control'), fields = ['MCC', 'MNC', 'LAC', 'Cell ID'], i, id, field, label, input, br, submitBtn = L.DomUtil.create('button', '');
+        var container = L.DomUtil.create('div', 'search-cell-control'), fields = ['MCC', 'MNC', 'LAC', 'Cell ID'], i, id, field, label, input, br, submitBtn = L.DomUtil.create('button', '');
         for (i = 0; i < fields.length; i += 1) {
             id = fields[i].toLowerCase().replace(' ', '_');
             field = L.DomUtil.create('div', 'cellsearch-line');
