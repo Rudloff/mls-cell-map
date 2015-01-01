@@ -3,7 +3,8 @@ var mnccolors = {
         1: 'orange',
         10: 'red',
         15: 'black',
-        20: 'blue'
+        20: 'blue',
+        25: 'green'
     },
     262: {
         1: 'purple',
