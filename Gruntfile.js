@@ -6,6 +6,9 @@ module.exports = function (grunt) {
             combine: {
                 files: {
                     'dist/main.js': ['js/mnccolors.js', 'js/map.js']
+                },
+                options: {
+                    sourceMap: true
                 }
             }
         },
