@@ -21,6 +21,7 @@ $query = $pdo->prepare(
     WHERE lon > :bb1 AND lon < :bb3
     AND lat > :bb2 AND lat < :bb4
     AND !(radio = 'UMTS' AND cell <=65535)
+    AND !(radio = 'GSM' AND cell = 65535)
     GROUP BY cell"
 );
 $query->execute(
