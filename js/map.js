@@ -11,6 +11,11 @@ function displayCircle(e) {
     circle.addTo(map);
 }
 
+function addMarkerText(e) {
+    'use strict';
+    e.target._icon.getElementsByTagName('i')[0].textContent = e.target.feature.properties.radio.substr(0, 1);
+}
+
 function showPopup(feature, layer) {
     'use strict';
     var color;
@@ -40,6 +45,7 @@ function showPopup(feature, layer) {
             markerColor: color
         }
     );
+    layer.on('add', addMarkerText);
     layer.on('click', displayCircle);
 }
 

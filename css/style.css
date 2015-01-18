@@ -34,6 +34,10 @@ html, body, .map {
     padding: 0.5em;
 }
 
+.awesome-marker i {
+    font-style: normal;
+}
+
 @media (max-width: 640px) {
     .leaflet-bottom .leaflet-control-scale {
         margin-bottom: 20px;
