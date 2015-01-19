@@ -169,7 +169,7 @@ function init() {
             maxNativeZoom: 13,
             attribution: '<a target="_blank"  href="https://location.services.mozilla.com/">Mozilla Location Service</a>'
         }
-    );
+    ), legend = L.control({position: 'bottomright'});
     markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 18 }).addTo(map);
     osm.addTo(map);
     coverage.addTo(map);
@@ -190,6 +190,23 @@ function init() {
     map.addControl(new SearchCellControl({position: 'topleft'}));
     map.addControl(mapInfo);
     getTimestamp();
+    legend.onAdd = function () {
+        var div = L.DomUtil.create('div', 'info legend leaflet-control-attribution'),
+            radioTypes = [
+                ['C', 'CDMA'],
+                ['G', 'GSM'],
+                ['U', 'UMTS'],
+                ['L', 'LTE']
+            ];
+        radioTypes.forEach(
+            function (radioType) {
+                div.innerHTML += '<b>' + radioType[0] + '</b>: ' + radioType[1] + '<br />';
+            }
+        );
+        return div;
+    };
+
+    legend.addTo(map);
 }
 
 window.addEventListener('load', init, false);
