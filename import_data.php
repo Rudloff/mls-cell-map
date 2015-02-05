@@ -13,7 +13,7 @@
 require_once 'config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
-$csvfile = 'data/MLS-full-cell-export.csv';
+$csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
@@ -115,7 +115,9 @@ foreach ($mcclist as $mcc) {
 
 //Timestamp
 echo 'Writing timestamp…'.PHP_EOL;
-file_put_contents('data/timestamp.json', json_encode(new DateTime()).PHP_EOL);
+file_put_contents(
+    __DIR__'/data/timestamp.json', json_encode(new DateTime()).PHP_EOL
+);
 
 //Done
 echo 'Done!'.PHP_EOL;
