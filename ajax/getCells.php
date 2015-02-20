@@ -22,6 +22,7 @@ $query = $pdo->prepare(
     AND lat > :bb2 AND lat < :bb4
     AND !(radio = 'UMTS' AND cell <=65535)
     AND !(radio = 'GSM' AND cell = 65535)
+    AND !(radio = 'UMTS' AND cell = 2147483647)
     GROUP BY cell"
 );
 $query->execute(
