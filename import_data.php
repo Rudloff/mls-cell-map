@@ -1,3 +1,4 @@
+#!/usr/bin/php
 <?php
 /**
  * Script to import the CSV data
