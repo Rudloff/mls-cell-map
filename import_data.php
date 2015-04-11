@@ -18,11 +18,15 @@ $csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
-$csv = file_get_contents(
-    'https://d17pt8qph6ncyq.cloudfront.net/export/'.
-    'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz'
-);
-file_put_contents($csvfile.'.gz', $csv);
+$distcsv=fopen($csvfile.'.gz', 'w+');
+$csv=fopen('https://d17pt8qph6ncyq.cloudfront.net/export/'.
+    'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r');
+if (!is_resource($distcsv) || !is_resource($csv)) {
+    die("Couldn't download data…".PHP_EOL);
+}
+while(!feof($distcsv)){
+    fwrite($csv, fread($distcsv, 8192));
+}
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
