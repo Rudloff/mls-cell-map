@@ -35,7 +35,7 @@ file_put_contents($csvfile, $csv);
 gzclose($gzip);
 
 //PDO
-$pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST, DBUSER, DBPASS);
+$pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
 $pdo->exec("SET NAMES 'utf8';");
 
 //Delete tables
