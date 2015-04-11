@@ -13,7 +13,7 @@
 header('Content-Type: application/json; charset=UTF-8');
 if (isset($_GET['cell_id'])) {
     include_once '../config.php';
-    $pdo = new PDO('mysql:dbname='.DBNAME.';host=localhost', DBUSER, DBPASS);
+    $pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST, DBUSER, DBPASS);
 
 
     $query = $pdo->prepare(
