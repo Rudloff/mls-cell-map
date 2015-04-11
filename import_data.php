@@ -28,6 +28,9 @@ file_put_contents($csvfile.'.gz', $csv);
 echo 'Uncompressing data…'.PHP_EOL;
 $gzip = gzopen($csvfile.'.gz', 'r');
 $csv = '';
+if (!is_resource($gzip)) {
+    die("Couldn't read gzip data…".PHP_EOL);
+}
 while (!gzeof($gzip)) {
     $csv .= gzread($gzip, 4096);
 }
