@@ -18,8 +18,8 @@ $csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
-$distcsv=fopen($csvfile.'.gz', 'w+');
-$csv=fopen('https://d17pt8qph6ncyq.cloudfront.net/export/'.
+$csv=fopen($csvfile.'.gz', 'w+');
+$distcsv=fopen('https://d17pt8qph6ncyq.cloudfront.net/export/'.
     'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r');
 if (!is_resource($distcsv) || !is_resource($csv)) {
     die("Couldn't download data…".PHP_EOL);
