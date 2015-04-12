@@ -36,4 +36,3 @@ if (isset($_GET['cell_id'])) {
 
     echo json_encode($cell);
 }
-?>

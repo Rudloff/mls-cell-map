@@ -90,4 +90,3 @@ foreach ($cells as $cell) {
 }
 $output['features'] = $features;
 echo json_encode($output);
-?>
