@@ -9,6 +9,6 @@
         "grunt-contrib-watch": "^0.6.1"
     },
     "scripts": {
-        "postinstall": "./node_modules/grunt-cli/bin/grunt; php import_data.php"
+        "postinstall": "./node_modules/grunt-cli/bin/grunt; php create_config.php; php import_data.php"
     }
 }
