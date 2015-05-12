@@ -35,10 +35,10 @@ $csv = '';
 if (!is_resource($gzip)) {
     die("Couldn't read gzip data…".PHP_EOL);
 }
+file_put_contents($csvfile, '');
 while (!gzeof($gzip)) {
-    $csv .= gzread($gzip, 4096);
+    file_put_contents($csvfile, gzread($gzip, 4096), FILE_APPEND);
 }
-file_put_contents($csvfile, $csv);
 gzclose($gzip);
 
 //PDO
