@@ -14,11 +14,12 @@
 require_once 'config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
-$csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
+$gzfile = tempnam(sys_get_temp_dir(), 'MLS-full-cell-export');
+$csvfile = tempnam(sys_get_temp_dir(), 'MLS-full-cell-export');
 
 //Download data
 echo 'Downloading data…'.PHP_EOL;
-$csv=fopen($csvfile.'.gz', 'w+');
+$csv=fopen($gzfile, 'w+');
 $distcsv=fopen('https://d17pt8qph6ncyq.cloudfront.net/export/'.
     'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r');
 if (!is_resource($distcsv) || !is_resource($csv)) {
@@ -30,7 +31,7 @@ while(!feof($distcsv)){
 
 //Uncompress data
 echo 'Uncompressing data…'.PHP_EOL;
-$gzip = gzopen($csvfile.'.gz', 'r');
+$gzip = gzopen($gzfile, 'r');
 $csv = '';
 if (!is_resource($gzip)) {
     die("Couldn't read gzip data…".PHP_EOL);
