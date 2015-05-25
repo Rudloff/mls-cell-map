@@ -10,5 +10,9 @@
     },
     "scripts": {
         "postinstall": "./node_modules/grunt-cli/bin/grunt; php create_config.php; php import_data.php"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Rudloff/mls-cell-map.git"
     }
 }
