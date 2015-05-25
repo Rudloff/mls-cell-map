@@ -20,12 +20,14 @@ $csvfile = tempnam(sys_get_temp_dir(), 'MLS-full-cell-export');
 //Download data
 echo 'Downloading data…'.PHP_EOL;
 $csv=fopen($gzfile, 'w+');
-$distcsv=fopen('https://d17pt8qph6ncyq.cloudfront.net/export/'.
-    'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r');
+$distcsv=fopen(
+    'https://d17pt8qph6ncyq.cloudfront.net/export/'.
+    'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r'
+);
 if (!is_resource($distcsv) || !is_resource($csv)) {
     die("Couldn't download data…".PHP_EOL);
 }
-while(!feof($distcsv)){
+while (!feof($distcsv)) {
     fwrite($csv, fread($distcsv, 8192));
 }
 
@@ -43,7 +45,9 @@ while (!gzeof($gzip)) {
 gzclose($gzip);
 
 //PDO
-$pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
+$pdo = new PDO(
+    'mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS
+);
 $pdo->exec("SET NAMES 'utf8';");
 
 //Delete tables
