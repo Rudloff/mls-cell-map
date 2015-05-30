@@ -8,7 +8,7 @@
     ],
     "license": "GPL",
     "dependencies": {
-        "Leaflet.awesome-markers": "~2.0.2",
+        "Leaflet.MakiMarkers": "~1.0.1",
         "leaflet.markercluster": "~0.4.0",
         "leaflet": "~0.7.3",
         "font-awesome": "~4.2.0",

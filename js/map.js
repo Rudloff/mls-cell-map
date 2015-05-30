@@ -11,18 +11,13 @@ function displayCircle(e) {
     circle.addTo(map);
 }
 
-function addMarkerText(e) {
-    'use strict';
-    e.target._icon.getElementsByTagName('i')[0].textContent = e.target.feature.properties.radio.substr(0, 1);
-}
-
 function showPopup(feature, layer) {
     'use strict';
     var color;
     if (mnccolors[feature.properties.mcc] && mnccolors[feature.properties.mcc][feature.properties.net]) {
         color = mnccolors[feature.properties.mcc][feature.properties.net];
     } else {
-        color = 'white';
+        color = '#000000';
     }
     layer.bindPopup(
         '<b>CID</b>: ' + feature.properties.cell +
@@ -40,12 +35,7 @@ function showPopup(feature, layer) {
             '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString(),
         { autoPan: false }
     );
-    layer.options.icon = L.AwesomeMarkers.icon(
-        {
-            markerColor: color
-        }
-    );
-    layer.on('add', addMarkerText);
+    layer.options.icon = L.MakiMarkers.icon({icon: feature.properties.radio.substr(0, 1).toLowerCase(), color: color, size: "m"});
     layer.on('click', displayCircle);
 }
 

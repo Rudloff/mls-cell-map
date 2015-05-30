@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="bower_components/leaflet.markercluster/dist/MarkerCluster.Default.css" />
         <link rel="stylesheet" href="bower_components/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
         <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css" />
-        <link rel="stylesheet" href="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
         <link rel="stylesheet" href="bower_components/leaflet-control-geocoder/Control.Geocoder.css" />
         <link rel="stylesheet" href="dist/main.css" />
         <meta name="description" content="This map shows the location of GSM cells, based on the measurement made by Mozilla Location Service." />
@@ -25,7 +24,7 @@
         <script src="bower_components/leaflet/dist/leaflet.js"></script>
         <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
         <script src="bower_components/leaflet.locatecontrol/dist/L.Control.Locate.min.js"></script>
-        <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.min.js"></script>
+        <script src="bower_components/Leaflet.MakiMarkers/Leaflet.MakiMarkers.js"></script>
         <script src="bower_components/leaflet-control-geocoder/Control.Geocoder.js"></script>
         <script src="bower_components/leaflet-plugins/control/Permalink.js"></script>
         <script src="bower_components/leaflet-info-control/InfoControl.js"></script>
