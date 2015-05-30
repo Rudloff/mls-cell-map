@@ -17,12 +17,14 @@ header('Content-Type: text/plain; charset=utf-8');
 $csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
 
 //Download data
-echo 'Downloading data…'.PHP_EOL;
+
 $csv=fopen($csvfile.'.gz', 'w+');
-$distcsv=fopen(
-    'https://d17pt8qph6ncyq.cloudfront.net/export/'.
-    'MLS-full-cell-export-'.date('Y-m-d').'T000000.csv.gz', 'r'
-);
+$date = new DateTime();
+$date->sub(new DateInterval('P1D'));
+$csvurl = 'https://d17pt8qph6ncyq.cloudfront.net/export/'.
+    'MLS-full-cell-export-'.$date->format('Y-m-d').'T000000.csv.gz';
+echo 'Downloading data from '.$csvurl.'…'.PHP_EOL;
+$distcsv=fopen($csvurl, 'r');
 if (!is_resource($distcsv) || !is_resource($csv)) {
     die("Couldn't download data…".PHP_EOL);
 }
