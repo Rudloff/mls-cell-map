@@ -23,6 +23,8 @@ $query = $pdo->prepare(
     AND !(radio = 'UMTS' AND cell <=65535)
     AND !(radio = 'GSM' AND cell = 65535)
     AND !(radio = 'UMTS' AND cell = 2147483647)
+    AND `range` > 0
+    AND samples > 1
     GROUP BY cell"
 );
 $query->execute(
