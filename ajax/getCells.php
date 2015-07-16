@@ -13,7 +13,7 @@
 header('Content-Type: application/json; charset=UTF-8');
 require_once '../config.php';
 $pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
-$bbox = split(',', $_GET['bbox']);
+$bbox = explode(',', $_GET['bbox']);
 
 $query = $pdo->prepare(
     "SELECT lon, lat, radio, mcc, cell, net, area, samples, `range`, created, updated
