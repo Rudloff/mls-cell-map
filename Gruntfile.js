@@ -29,6 +29,14 @@ module.exports = function (grunt) {
                     files: ['css/*.css'],
                     tasks: ['cssmin']
                 }
+            },
+            jslint: {
+                scripts: {
+                    src: ['js/*.js']
+                },
+                Gruntfile: {
+                    src: ['Gruntfile.js']
+                }
             }
         }
     );
@@ -36,6 +44,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-jslint');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
 };

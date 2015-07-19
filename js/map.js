@@ -13,13 +13,8 @@ function displayCircle(e) {
 
 function showPopup(feature, layer) {
     'use strict';
-    var color;
-    if (mnccolors[feature.properties.mcc] && mnccolors[feature.properties.mcc][feature.properties.net]) {
-        color = mnccolors[feature.properties.mcc][feature.properties.net];
-    } else {
-        color = '#000000';
-    }
-    var popupContent = '<b>CID</b>: ' + feature.properties.cell +
+    var color,
+        popupContent = '<b>CID</b>: ' + feature.properties.cell +
             '<br/><b>MNC</b>: ' + feature.properties.net +
             '<br/><b>MCC</b>: ' + feature.properties.mcc +
             '<br/><b>LAC</b>: ' + feature.properties.area +
@@ -32,6 +27,11 @@ function showPopup(feature, layer) {
             '<br/><br/><i>' + feature.properties.samples + '</i> measurements' +
             '</br><b>Created</b>: ' + new Date(feature.properties.created * 1000).toISOString() +
             '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString();
+    if (mnccolors[feature.properties.mcc] && mnccolors[feature.properties.mcc][feature.properties.net]) {
+        color = mnccolors[feature.properties.mcc][feature.properties.net];
+    } else {
+        color = '#000000';
+    }
     if (mnclinks[feature.properties.mcc] && mnclinks[feature.properties.mcc][feature.properties.net]) {
         popupContent += '</br><b>Website</b>: <a target="_blank" href="' + mnclinks[feature.properties.mcc][feature.properties.net] + '">' + mnclinks[feature.properties.mcc][feature.properties.net] + '</a>';
     }
