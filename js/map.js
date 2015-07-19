@@ -1,4 +1,4 @@
-/*global L, mnccolors, InfoControl*/
+/*global L, mnccolors, mnclinks, InfoControl*/
 /*jslint browser: true*/
 var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'});
 
@@ -19,8 +19,7 @@ function showPopup(feature, layer) {
     } else {
         color = '#000000';
     }
-    layer.bindPopup(
-        '<b>CID</b>: ' + feature.properties.cell +
+    var popupContent = '<b>CID</b>: ' + feature.properties.cell +
             '<br/><b>MNC</b>: ' + feature.properties.net +
             '<br/><b>MCC</b>: ' + feature.properties.mcc +
             '<br/><b>LAC</b>: ' + feature.properties.area +
@@ -32,7 +31,12 @@ function showPopup(feature, layer) {
             '</br><b>Range</b>: ' + feature.properties.range + ' m' +
             '<br/><br/><i>' + feature.properties.samples + '</i> measurements' +
             '</br><b>Created</b>: ' + new Date(feature.properties.created * 1000).toISOString() +
-            '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString(),
+            '</br><b>Updated</b>: ' + new Date(feature.properties.updated * 1000).toISOString();
+    if (mnclinks[feature.properties.mcc] && mnclinks[feature.properties.mcc][feature.properties.net]) {
+        popupContent += '</br><b>Website</b>: <a target="_blank" href="' + mnclinks[feature.properties.mcc][feature.properties.net] + '">' + mnclinks[feature.properties.mcc][feature.properties.net] + '</a>';
+    }
+    layer.bindPopup(
+        popupContent,
         { autoPan: false }
     );
     layer.options.icon = L.MakiMarkers.icon({icon: feature.properties.radio.substr(0, 1).toLowerCase(), color: color, size: "m"});

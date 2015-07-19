@@ -6,7 +6,7 @@ module.exports = function (grunt) {
             uglify: {
                 combine: {
                     files: {
-                        'dist/main.js': ['js/mnccolors.js', 'js/map.js']
+                        'dist/main.js': ['js/*.js']
                     },
                     options: {
                         sourceMap: true
