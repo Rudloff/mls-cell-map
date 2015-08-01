@@ -8,7 +8,7 @@ SET time_zone = "+00:00";
 
 
 CREATE TABLE IF NOT EXISTS `cells` (
-  `radio` enum('CDMA','GSM','LTE','UMTS') NOT NULL,
+  `radio` enum('CDMA','GSM','LTE','WCDMA') NOT NULL,
   `mcc` smallint(3) unsigned NOT NULL,
   `net` smallint(5) unsigned NOT NULL,
   `area` smallint(5) unsigned NOT NULL,

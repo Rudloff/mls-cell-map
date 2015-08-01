@@ -189,7 +189,7 @@ function init() {
             radioTypes = [
                 ['C', 'CDMA'],
                 ['G', 'GSM'],
-                ['U', 'UMTS'],
+                ['W', 'WCDMA'],
                 ['L', 'LTE']
             ];
         radioTypes.forEach(

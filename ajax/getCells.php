@@ -20,9 +20,9 @@ $query = $pdo->prepare(
     FROM cells
     WHERE lon > :bb1 AND lon < :bb3
     AND lat > :bb2 AND lat < :bb4
-    AND !(radio = 'UMTS' AND cell <=65535)
+    AND !(radio = 'WCDMA' AND cell <=65535)
     AND !(radio = 'GSM' AND cell = 65535)
-    AND !(radio = 'UMTS' AND cell = 2147483647)
+    AND !(radio = 'WCDMA' AND cell = 2147483647)
     AND `range` > 0
     AND samples > 1
     GROUP BY cell"
