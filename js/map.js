@@ -20,7 +20,7 @@ function showPopup(feature, layer) {
             '<br/><b>LAC</b>: ' + feature.properties.area +
             '<br/><b>Operator</b>: ' + feature.properties.operator +
             '<br/><b>Country</b>: ' + feature.properties.country +
-            '<br/><b>Type</b>: ' + feature.properties.radio +
+            '<br/><b>Type</b>: ' + (feature.properties.radio || 'Unknown') +
             '</br></br><b>Latitude</b>: ' + feature.geometry.coordinates[1] +
             '</br><b>Longitude</b>: ' + feature.geometry.coordinates[0] +
             '</br><b>Range</b>: ' + feature.properties.range + ' m' +
@@ -39,7 +39,7 @@ function showPopup(feature, layer) {
         popupContent,
         { autoPan: false }
     );
-    layer.options.icon = L.MakiMarkers.icon({icon: feature.properties.radio.substr(0, 1).toLowerCase(), color: color, size: "m"});
+    layer.options.icon = L.MakiMarkers.icon({icon: (feature.properties.radio.substr(0, 1).toLowerCase() || null), color: color, size: "m"});
     layer.on('click', displayCircle);
 }
 
