@@ -1,14 +1,15 @@
 #!/usr/bin/php
 <?php
 /**
- * Script to import the CSV data
- * 
+ * Script to import the CSV data.
+ *
  * PHP version 5.3
- * 
+ *
  * @category Script
- * @package  MLS_Cell_Map
+ *
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @license  GPL http://www.gnu.org/licenses/gpl.html
+ *
  * @link     https://carto.rudloff.pro/gsm/
  * */
 require_once 'config.php';
@@ -18,13 +19,13 @@ $csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
 
 //Download data
 
-$csv=fopen($csvfile.'.gz', 'w+');
+$csv = fopen($csvfile.'.gz', 'w+');
 $date = new DateTime();
 $date->sub(new DateInterval('P1D'));
 $csvurl = 'https://d17pt8qph6ncyq.cloudfront.net/export/'.
     'MLS-full-cell-export-'.$date->format('Y-m-d').'T000000.csv.gz';
 echo 'Downloading data from '.$csvurl.'…'.PHP_EOL;
-$distcsv=fopen($csvurl, 'r');
+$distcsv = fopen($csvurl, 'r');
 if (!is_resource($distcsv) || !is_resource($csv)) {
     die("Couldn't download data…".PHP_EOL);
 }
@@ -54,9 +55,9 @@ $pdo->exec("SET NAMES 'utf8';");
 //Delete tables
 echo 'Deleting tables…'.PHP_EOL;
 $query = $pdo->prepare(
-    "DROP TABLE `cells`;
+    'DROP TABLE `cells`;
     DROP TABLE `cells_mnc`;
-    DROP TABLE `cells_country`;"
+    DROP TABLE `cells_country`;'
 );
 $query->execute();
 
@@ -89,11 +90,11 @@ $mnclist = json_decode(
 );
 foreach ($mnclist as $mnc) {
     $query->execute(
-        array(
-            ':mcc'=>$mnc[0],
-            ':mnc'=>$mnc[1],
-            ':net'=>$mnc[2]
-        )
+        [
+            ':mcc' => $mnc[0],
+            ':mnc' => $mnc[1],
+            ':net' => $mnc[2],
+        ]
     );
 }
 
@@ -111,18 +112,18 @@ foreach ($mcclist as $mcc) {
     if (is_array($mcc[4])) {
         foreach ($mcc[4] as $submcc) {
             $query->execute(
-                array(
-                    ':mcc'=>$submcc,
-                    ':country'=>$mcc[0]
-                )
+                [
+                    ':mcc'     => $submcc,
+                    ':country' => $mcc[0],
+                ]
             );
         }
     } else {
         $query->execute(
-            array(
-                ':mcc'=>$mcc[4],
-                ':country'=>$mcc[0]
-            )
+            [
+                ':mcc'     => $mcc[4],
+                ':country' => $mcc[0],
+            ]
         );
     }
 }

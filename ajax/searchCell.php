@@ -1,13 +1,14 @@
 <?php
 /**
- * Returns a cell position
- * 
+ * Returns a cell position.
+ *
  * PHP version 5.4
- * 
+ *
  * @category AJAX
- * @package  MLS_Cell_Map
+ *
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @license  GPL http://www.gnu.org/licenses/gpl.html
+ *
  * @link     https://carto.rudloff.pro/gsm/
  * */
 header('Content-Type: application/json; charset=UTF-8');
@@ -17,19 +18,19 @@ if (isset($_GET['cell_id'])) {
 
 
     $query = $pdo->prepare(
-        "SELECT lon, lat
+        'SELECT lon, lat
         FROM cells
         WHERE mcc = :mcc AND net = :mnc
         AND cell = :cell_id AND area = :lac
-        LIMIT 1;"
+        LIMIT 1;'
     );
     $query->execute(
-        array(
-            ':mcc'=>$_GET['mcc'],
-            ':mnc'=>$_GET['mnc'],
-            ':cell_id'=>$_GET['cell_id'],
-            ':lac'=>$_GET['lac']
-        )
+        [
+            ':mcc'     => $_GET['mcc'],
+            ':mnc'     => $_GET['mnc'],
+            ':cell_id' => $_GET['cell_id'],
+            ':lac'     => $_GET['lac'],
+        ]
     );
 
     $cell = $query->fetch(PDO::FETCH_ASSOC);
