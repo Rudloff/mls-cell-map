@@ -160,7 +160,7 @@ function init() {
     ), coverage = L.tileLayer(
         'https://d17pt8qph6ncyq.cloudfront.net/tiles/{z}/{x}/{y}.png',
         {
-            maxNativeZoom: 13,
+            maxNativeZoom: 12,
             attribution: '<a target="_blank"  href="https://location.services.mozilla.com/">Mozilla Location Service</a>'
         }
     ), legend = L.control({position: 'bottomright'});
