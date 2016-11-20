@@ -1,14 +1,15 @@
 {
     "name": "mls-cell-map",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "dependencies": {
         "grunt": "~0.4.5",
         "grunt-cli": "~0.1.13",
-        "grunt-contrib-cssmin": "~0.10.0",
-        "grunt-contrib-uglify": "~0.6.0",
+        "grunt-contrib-cssmin": "~0.14.0",
+        "grunt-contrib-uglify": "~0.11.0",
         "grunt-contrib-watch": "~0.6.1",
         "grunt-jslint": "~1.1.14"
     },
+    "license": "GPL-3.0",
     "scripts": {
         "postinstall": "./node_modules/grunt-cli/bin/grunt; php create_config.php; php import_data.php"
     },

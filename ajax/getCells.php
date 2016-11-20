@@ -1,13 +1,14 @@
 <?php
 /**
- * Returns GeoJSON data
- * 
+ * Returns GeoJSON data.
+ *
  * PHP version 5.4
- * 
+ *
  * @category AJAX
- * @package  MLS_Cell_Map
+ *
  * @author   Pierre Rudloff <contact@rudloff.pro>
  * @license  GPL http://www.gnu.org/licenses/gpl.html
+ *
  * @link     https://carto.rudloff.pro/gsm/
  * */
 header('Content-Type: application/json; charset=UTF-8');
@@ -28,25 +29,25 @@ $query = $pdo->prepare(
     GROUP BY cell"
 );
 $query->execute(
-    array(
-        ':bb1'=>$bbox[0],
-        ':bb2'=>$bbox[1],
-        ':bb3'=>$bbox[2],
-        ':bb4'=>$bbox[3]
-    )
+    [
+        ':bb1' => $bbox[0],
+        ':bb2' => $bbox[1],
+        ':bb3' => $bbox[2],
+        ':bb4' => $bbox[3],
+    ]
 );
 $cells = $query->fetchAll(PDO::FETCH_ASSOC);
-$output = array('type'=>'FeatureCollection');
-$features = array();
+$output = ['type' => 'FeatureCollection'];
+$features = [];
 $mncquery = $pdo->prepare(
-    "SELECT Network
+    'SELECT Network
     FROM cells_mnc
-    WHERE `MCC` = :mcc AND `MNC` = :mnc"
+    WHERE `MCC` = :mcc AND `MNC` = :mnc'
 );
 $mccquery = $pdo->prepare(
-    "SELECT Country
+    'SELECT Country
     FROM cells_country
-    WHERE `MCC` = :mcc;"
+    WHERE `MCC` = :mcc;'
 );
 foreach ($cells as $cell) {
     if ($cell['net'] < 10) {
@@ -55,39 +56,39 @@ foreach ($cells as $cell) {
         $mnc = $cell['net'];
     }
     $mncquery->execute(
-        array(
-            ':mcc'=>$cell['mcc'],
-            ':mnc'=>$mnc
-        )
+        [
+            ':mcc' => $cell['mcc'],
+            ':mnc' => $mnc,
+        ]
     );
     $network = $mncquery->fetch(PDO::FETCH_ASSOC);
     if (isset($network['Network'])) {
         $mccquery->execute(
-            array(
-                ':mcc'=>$cell['mcc']
-            )
+            [
+                ':mcc' => $cell['mcc'],
+            ]
         );
         $country = $mccquery->fetch(PDO::FETCH_ASSOC);
-        $features[] = array(
-            'type'=>'Feature',
-            "geometry"=>array(
-                "type"=>"Point",
-                "coordinates"=>array(floatval($cell['lon']), floatval($cell['lat']))
-            ),
-            'properties'=>array(
-                'radio'=>$cell['radio'],
-                'mcc'=>$cell['mcc'],
-                'net'=>$cell['net'],
-                'cell'=>$cell['cell'],
-                'area'=>$cell['area'],
-                'samples'=>$cell['samples'],
-                'range'=>$cell['range'],
-                'created'=>$cell['created'],
-                'updated'=>$cell['updated'],
-                'country'=>$country['Country'],
-                'operator'=>$network['Network']
-            )
-        );
+        $features[] = [
+            'type'     => 'Feature',
+            'geometry' => [
+                'type'        => 'Point',
+                'coordinates' => [floatval($cell['lon']), floatval($cell['lat'])],
+            ],
+            'properties' => [
+                'radio'    => $cell['radio'],
+                'mcc'      => $cell['mcc'],
+                'net'      => $cell['net'],
+                'cell'     => $cell['cell'],
+                'area'     => $cell['area'],
+                'samples'  => $cell['samples'],
+                'range'    => $cell['range'],
+                'created'  => $cell['created'],
+                'updated'  => $cell['updated'],
+                'country'  => $country['Country'],
+                'operator' => $network['Network'],
+            ],
+        ];
     }
 }
 $output['features'] = $features;
