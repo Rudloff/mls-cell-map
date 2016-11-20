@@ -1,6 +1,6 @@
 {
     "name": "mls-cell-map",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "dependencies": {
         "grunt": "~0.4.5",
         "grunt-cli": "~0.1.13",
