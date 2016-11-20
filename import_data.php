@@ -64,7 +64,7 @@ $query->execute();
 //Create tables
 echo 'Creating tables…'.PHP_EOL;
 $query = $pdo->prepare(
-    file_get_contents('create_tables.sql')
+    file_get_contents(__DIR__.'/create_tables.sql')
 );
 $query->execute();
 
