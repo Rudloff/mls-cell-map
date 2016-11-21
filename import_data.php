@@ -12,7 +12,7 @@
  *
  * @link     https://carto.rudloff.pro/gsm/
  * */
-require_once 'config.php';
+require_once __DIR__.'/config.php';
 header('Content-Type: text/plain; charset=utf-8');
 
 $csvfile = __DIR__.'/data/MLS-full-cell-export.csv';
