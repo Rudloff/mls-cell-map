@@ -1,19 +1,19 @@
 {
-    "name": "mls-cell-map",
-    "homepage": "https://carto.rudloff.pro/gsm/",
-    "description": "GSM cells map using Mozilla Location Service data",
-    "authors": [
-        "Pierre Rudloff"
-    ],
-    "license": "GPL",
-    "dependencies": {
-        "Leaflet.MakiMarkers": "~1.0.1",
-        "leaflet.markercluster": "~0.4.0",
-        "leaflet": "~0.7.3",
-        "ionicons": "~2.0.1",
-        "leaflet.locatecontrol": "~0.45.0",
-        "leaflet-plugins": "~1.3.3",
-        "leaflet-control-geocoder": "~1.2.1",
-        "leaflet-info-control": "~0.1.0"
-    }
+  "name": "mls-cell-map",
+  "homepage": "https://carto.rudloff.pro/gsm/",
+  "description": "GSM cells map using Mozilla Location Service data",
+  "authors": [
+    "Pierre Rudloff"
+  ],
+  "license": "GPL",
+  "dependencies": {
+    "Leaflet.MakiMarkers": "~1.0.1",
+    "leaflet.markercluster": "~0.4.0",
+    "leaflet": "~0.7.3",
+    "ionicons": "~2.0.1",
+    "leaflet.locatecontrol": "~0.45.0",
+    "leaflet-plugins": "~1.3.3",
+    "leaflet-control-geocoder": "~1.2.1",
+    "leaflet-info-control": "~0.1.0"
+  }
 }
