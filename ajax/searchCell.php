@@ -16,7 +16,6 @@ if (isset($_GET['cell_id'])) {
     include_once '../config.php';
     $pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
 
-
     $query = $pdo->prepare(
         'SELECT lon, lat
         FROM cells
