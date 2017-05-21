@@ -12,10 +12,12 @@ You can contribute to the data by installing one the [client applications](https
 
 ## Install
 
-    mkdir data
-    chmod -R 777 data
-    php import_data.php
-    bower install
+```bash
+mkdir data
+chmod -R 777 data
+php import_data.php
+bower install
+```
 
 ## Layers
 
