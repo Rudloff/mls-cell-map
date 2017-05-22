@@ -32,6 +32,8 @@ bower install
 grunt
 ```
 
+(If you are using using MySQL < 5.6, the import will not work if `local-infile` is not enabled.)
+
 ## Layers
 
 * Cells : estimated position and range of cells, based on collected data
