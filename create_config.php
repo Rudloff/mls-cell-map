@@ -1,16 +1,7 @@
 <?php
 /**
  * Script to create the config file.
- *
- * PHP version 5.3
- *
- * @category Script
- *
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GPL http://www.gnu.org/licenses/gpl.html
- *
- * @link     https://carto.rudloff.pro/gsm/
- * */
+ */
 $env = getenv('DBNAME');
 if (isset($env)) {
     $config = "<?php

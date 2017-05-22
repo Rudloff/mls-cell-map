@@ -1,16 +1,7 @@
 <?php
 /**
  * Returns GeoJSON data.
- *
- * PHP version 5.4
- *
- * @category AJAX
- *
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GPL http://www.gnu.org/licenses/gpl.html
- *
- * @link     https://carto.rudloff.pro/gsm/
- * */
+ */
 header('Content-Type: application/json; charset=UTF-8');
 require_once '../config.php';
 $pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);

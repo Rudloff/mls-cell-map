@@ -1,16 +1,7 @@
 <?php
 /**
  * Returns a cell position.
- *
- * PHP version 5.4
- *
- * @category AJAX
- *
- * @author   Pierre Rudloff <contact@rudloff.pro>
- * @license  GPL http://www.gnu.org/licenses/gpl.html
- *
- * @link     https://carto.rudloff.pro/gsm/
- * */
+ */
 header('Content-Type: application/json; charset=UTF-8');
 if (isset($_GET['cell_id'])) {
     include_once '../config.php';
