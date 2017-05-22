@@ -14,6 +14,14 @@ You can contribute to the data by installing one the [client applications](https
 
 You first need to install [Bower](https://bower.io/) and [Grunt](https://gruntjs.com/).
 
+First you need to create the config file:
+
+```bash
+cp config.sample.php config.php
+```
+
+And edit `config.php` with you MySQL config.
+
 Then, you need to run the following shell commands:
 
 ```bash
