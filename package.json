@@ -1,16 +1,29 @@
 {
   "name": "mls-cell-map",
+  "description": "GSM cells map using Mozilla Location Service data",
   "version": "0.1.1",
+  "author": "Pierre Rudloff",
+  "bugs": "https://github.com/Rudloff/mls-cell-map/issues",
   "dependencies": {
+    "bower": "~1.8.0",
     "grunt": "~0.4.5",
     "grunt-cli": "~0.1.13",
     "grunt-contrib-cssmin": "~0.14.0",
     "grunt-contrib-uglify": "~0.11.0",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-fixpack": "~0.1.0",
     "grunt-jslint": "~1.1.14",
-    "bower": "~1.8.0"
+    "grunt-jsonlint": "~1.1.0",
+    "grunt-phpcs": "~0.4.0"
   },
+  "homepage": "https://gsm-map.netlib.re/",
+  "keywords": [
+    "Mozilla Location Service",
+    "gsm",
+    "map"
+  ],
   "license": "GPL-3.0",
+  "main": "index.html",
   "repository": {
     "type": "git",
     "url": "https://github.com/Rudloff/mls-cell-map.git"

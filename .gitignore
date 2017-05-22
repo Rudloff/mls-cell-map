@@ -3,3 +3,4 @@ data/
 config.php
 dist/
 node_modules/
+vendor/

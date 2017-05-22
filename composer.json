@@ -1,0 +1,17 @@
+{
+  "name": "rudloff/mls-cell-map",
+  "description": "GSM cells map using Mozilla Location Service data",
+  "license": "GPL-3.0",
+  "require-dev": {
+    "symfony/var-dumper": "~3.2.0",
+    "squizlabs/php_codesniffer": "~3.0.0"
+  },
+  "authors": [
+    {
+      "name": "Pierre Rudloff",
+      "email": "contact@rudloff.pro",
+      "homepage": "https://rudloff.pro/",
+      "role": "Developer"
+    }
+  ]
+}

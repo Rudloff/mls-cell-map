@@ -30,12 +30,34 @@ module.exports = function (grunt) {
                     tasks: ['cssmin']
                 }
             },
+            jsonlint: {
+                manifests: {
+                    src: '*.json',
+                    options: {
+                        format: true
+                    }
+                }
+            },
             jslint: {
                 scripts: {
                     src: ['js/*.js']
                 },
                 Gruntfile: {
                     src: ['Gruntfile.js']
+                }
+            },
+            fixpack: {
+                package: {
+                    src: 'package.json'
+                }
+            },
+            phpcs: {
+                options: {
+                    standard: 'PSR2',
+                    bin: 'vendor/bin/phpcs'
+                },
+                php: {
+                    src: ['*.php', 'ajax/*.php']
                 }
             }
         }
@@ -45,6 +67,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-jslint');
+    grunt.loadNpmTasks('grunt-jsonlint');
+    grunt.loadNpmTasks('grunt-fixpack');
+    grunt.loadNpmTasks('grunt-phpcs');
 
     grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
 };
