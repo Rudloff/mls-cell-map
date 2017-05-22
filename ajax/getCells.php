@@ -85,4 +85,6 @@ if (isset($_GET['bbox'])) {
     }
     $output['features'] = $features;
     echo json_encode($output);
+} else {
+    http_response_code(400);
 }
