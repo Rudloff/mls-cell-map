@@ -1,4 +1,4 @@
-/*global L, mnccolors, mnclinks, InfoControl*/
+/*global L, mnccolors, mnclinks, InfoControl, XMLHttpRequest*/
 /*jslint browser: true*/
 var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'});
 
