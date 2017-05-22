@@ -34,6 +34,16 @@ grunt
 
 (If you are using using MySQL < 5.6, the import will not work if `local-infile` is not enabled.)
 
+### Cron
+
+If you need to have up-to-date data and don't want to run the import script manually,
+you can add something like this in `/etc/cron.daily/mls-cell-map`:
+
+```bash
+#!/bin/sh
+php /path/to/mls-cell-map/import_data.php > /path/to/mls-cell-map/cron.log
+```
+
 ## Layers
 
 * Cells : estimated position and range of cells, based on collected data
