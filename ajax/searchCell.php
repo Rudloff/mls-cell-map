@@ -26,4 +26,6 @@ if (isset($_GET['cell_id'])) {
     $cell = $query->fetch(PDO::FETCH_ASSOC);
 
     echo json_encode($cell);
+} else {
+    http_response_code(400);
 }
