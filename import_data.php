@@ -71,7 +71,7 @@ $query->execute();
 //Load CSV files
 echo 'Importing data…'.PHP_EOL;
 $query = $pdo->prepare(
-    "LOAD DATA INFILE '".$csvfile."'
+    "LOAD DATA LOCAL INFILE '".$csvfile."'
     INTO TABLE `cells`
     FIELDS TERMINATED BY ','
     IGNORE 1 LINES;"
