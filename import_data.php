@@ -38,7 +38,8 @@ gzclose($gzip);
 
 //PDO
 $pdo = new PDO(
-    'mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS
+    'mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS,
+    [PDO::MYSQL_ATTR_LOCAL_INFILE => true]
 );
 $pdo->exec("SET NAMES 'utf8';");
 

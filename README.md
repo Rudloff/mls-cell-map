@@ -32,8 +32,6 @@ bower install
 grunt
 ```
 
-(If you are using using MySQL < 5.6, the import will not work if `local-infile` is not enabled.)
-
 ### Cron
 
 If you need to have up-to-date data and don't want to run the import script manually,
