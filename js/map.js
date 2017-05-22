@@ -1,6 +1,6 @@
 /*global L, mnccolors, mnclinks, InfoControl, XMLHttpRequest*/
 /*jslint browser: true*/
-var map, markers, circle, httpRequest = new XMLHttpRequest(), addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'});
+var map, markers, circle, addedPoints = [], mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'});
 
 function displayCircle(e) {
     'use strict';
@@ -70,9 +70,10 @@ function showMarkers(e) {
 
 function getMarkers() {
     'use strict';
-    httpRequest.onreadystatechange = showMarkers;
-    httpRequest.open('GET', 'ajax/getCells.php?bbox=' + map.getBounds().toBBoxString(), true);
-    httpRequest.send(null);
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = showMarkers;
+    ajax.open('GET', 'ajax/getCells.php?bbox=' + map.getBounds().toBBoxString(), true);
+    ajax.send(null);
 }
 
 function showTimestamp(e) {
