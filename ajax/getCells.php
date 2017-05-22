@@ -3,7 +3,7 @@
  * Returns GeoJSON data.
  */
 header('Content-Type: application/json; charset=UTF-8');
-require_once '../config.php';
+require_once __DIR__.'/../config.php';
 if (isset($_GET['bbox'])) {
     $pdo = new PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
     $bbox = explode(',', $_GET['bbox']);
