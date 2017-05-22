@@ -14,6 +14,8 @@ You can contribute to the data by installing one the [client applications](https
 
 You first need to install [Bower](https://bower.io/) and [Grunt](https://gruntjs.com/).
 
+Then, you need to run the following shell commands:
+
 ```bash
 mkdir data
 chmod -R 777 data
