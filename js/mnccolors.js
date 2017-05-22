@@ -1,4 +1,5 @@
-var mnccolors = {
+/*global cellMap*/
+cellMap.mnccolors = {
     208: {
         1: '#FF6600',
         10: '#E90003',

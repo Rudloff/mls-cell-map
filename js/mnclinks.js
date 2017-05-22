@@ -1,4 +1,5 @@
-var mnclinks = {
+/*global cellMap*/
+cellMap.mnclinks = {
     '208': {
         '1': 'http://www.orange.fr/',
         '2': 'http://www.orange.fr/',
