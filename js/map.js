@@ -144,6 +144,7 @@ var SearchCellControl = L.Control.extend(
 
 function init() {
     'use strict';
+    L.MakiMarkers.accessToken = 'pk.eyJ1IjoicnVkbG9mZiIsImEiOiJjajJ6d203Z20wMDBoMzNuMGd6cmdxcjFjIn0.hS4m5nq2EH_4QMIzl5kBNQ';
     map = L.map('map',  { minZoom: 11, maxZoom: 18 }).setView([48.57457, 7.75875], 13);
     map.zoomControl.setPosition('topright');
     L.control.locate(
