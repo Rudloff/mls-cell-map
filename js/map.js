@@ -2,6 +2,9 @@
 /*jslint browser: true*/
 var cellMap = (function () {
     'use strict';
+    if (typeof InfoControl !== 'function') {
+        throw 'leaflet-info-control is not loaded correctly';
+    }
     var map, markers, circle,
         addedPoints = [],
         mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'}),
