@@ -14,7 +14,7 @@
     "leaflet.locatecontrol": "~0.61.0",
     "leaflet-plugins": "~3.0.0",
     "leaflet-control-geocoder": "1.5.3",
-    "leaflet-info-control": "~0.1.0",
+    "leaflet-info-control": "~0.2.0",
     "font-awesome": "~4.7.0"
   },
   "resolutions": {

@@ -81,9 +81,8 @@ var cellMap = (function () {
 
     function showTimestamp(e) {
         if (e.target.readyState === 4 && e.target.status === 200) {
-            var json = JSON.parse(e.target.response),
-                container = mapInfo.getContainer();
-            container.innerHTML += ' (Last update: ' + json.date.substring(0, 10) + ')';
+            var json = JSON.parse(e.target.response);
+            mapInfo.setContent(mapInfo.getContent() + ' (Last update: ' + json.date.substring(0, 10) + ')');
         }
     }
 
