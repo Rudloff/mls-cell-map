@@ -15,7 +15,8 @@
     "leaflet-plugins": "~3.0.0",
     "leaflet-control-geocoder": "1.5.3",
     "leaflet-info-control": "~0.2.0",
-    "font-awesome": "~4.7.0"
+    "font-awesome": "~4.7.0",
+    "leaflet-ajax": "~2.1.0"
   },
   "resolutions": {
     "leaflet": "~1.0.3"

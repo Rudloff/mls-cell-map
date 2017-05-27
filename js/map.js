@@ -57,49 +57,34 @@ var cellMap = (function () {
         return true;
     }
 
-    function showMarkers(e) {
-        if (e.target.readyState === 4 && e.target.status === 200) {
-            var cells = JSON.parse(e.target.response);
-            markers.addLayer(
-                L.geoJson(
-                    cells,
-                    {
-                        onEachFeature: showPopup,
-                        filter: addNewMarkers
-                    }
-                )
-            );
-        }
+    function showMarkers(data) {
+        markers.addLayer(
+            L.geoJson(
+                data,
+                {
+                    onEachFeature: showPopup,
+                    filter: addNewMarkers
+                }
+            )
+        );
     }
 
     function getMarkers() {
-        var ajax = new XMLHttpRequest();
-        ajax.onreadystatechange = showMarkers;
-        ajax.open('GET', 'ajax/getCells.php?bbox=' + map.getBounds().toBBoxString(), true);
-        ajax.send(null);
+        L.Util.ajax('ajax/getCells.php?bbox=' + map.getBounds().toBBoxString())
+            .then(showMarkers);
     }
 
-    function showTimestamp(e) {
-        if (e.target.readyState === 4 && e.target.status === 200) {
-            var json = JSON.parse(e.target.response);
-            mapInfo.setContent(mapInfo.getContent() + ' (Last update: ' + json.date.substring(0, 10) + ')');
-        }
+    function showTimestamp(json) {
+        mapInfo.setContent(mapInfo.getContent() + ' (Last update: ' + json.date.substring(0, 10) + ')');
     }
 
     function getTimestamp() {
-        var ajax = new XMLHttpRequest();
-        ajax.onreadystatechange = showTimestamp;
-        ajax.open('GET', 'data/timestamp.json');
-        ajax.send(null);
+        L.Util.ajax('data/timestamp.json')
+            .then(showTimestamp);
     }
 
-    function goToCell(e) {
-        if (e.target.readyState === 4 && e.target.status === 200) {
-            var cell = JSON.parse(e.target.response);
-            if (cell) {
-                map.setView(cell, 18);
-            }
-        }
+    function goToCell(cell) {
+        map.setView(cell, 18);
     }
 
     SearchCellControl = L.Control.extend(
@@ -108,10 +93,12 @@ var cellMap = (function () {
                 L.Util.setOptions(this, options);
             },
             searchCell: function () {
-                var ajax = new XMLHttpRequest();
-                ajax.onreadystatechange = goToCell;
-                ajax.open('GET', 'ajax/searchCell.php?mcc=' + document.getElementById('mcc').value + '&mnc=' + document.getElementById('mnc').value + '&lac=' + document.getElementById('lac').value + '&cell_id=' + document.getElementById('cell_id').value);
-                ajax.send(null);
+                L.Util.ajax(
+                    'ajax/searchCell.php?mcc=' + document.getElementById('mcc').value +
+                        '&mnc=' + document.getElementById('mnc').value +
+                        '&lac=' + document.getElementById('lac').value +
+                        '&cell_id=' + document.getElementById('cell_id').value
+                ).then(goToCell);
             },
             onAdd: function () {
                 var container = L.DomUtil.create('div', 'search-cell-control'), fields = ['MCC', 'MNC', 'LAC', 'Cell ID'], i, id, field, label, input, br, submitBtn = L.DomUtil.create('button', '');
