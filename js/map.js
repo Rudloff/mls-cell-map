@@ -94,10 +94,10 @@ var cellMap = (function () {
             },
             searchCell: function () {
                 L.Util.ajax(
-                    'ajax/searchCell.php?mcc=' + document.getElementById('mcc').value +
-                        '&mnc=' + document.getElementById('mnc').value +
-                        '&lac=' + document.getElementById('lac').value +
-                        '&cell_id=' + document.getElementById('cell_id').value
+                    'ajax/searchCell.php?mcc=' + L.DomUtil.get('mcc').value +
+                        '&mnc=' + L.DomUtil.get('mnc').value +
+                        '&lac=' + L.DomUtil.get('lac').value +
+                        '&cell_id=' + L.DomUtil.get('cell_id').value
                 ).then(goToCell);
             },
             onAdd: function () {
