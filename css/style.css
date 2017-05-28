@@ -38,6 +38,10 @@ html, body, .map {
     font-style: normal;
 }
 
+.leaflet-control-loader {
+    z-index: 1000;
+}
+
 @media (max-width: 640px) {
     .leaflet-bottom .leaflet-control-scale {
         margin-bottom: 20px;
