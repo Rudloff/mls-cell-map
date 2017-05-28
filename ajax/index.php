@@ -1,6 +1,7 @@
 <?php
-use Slim\App;
+
 use MlsCellMap\Controller\AjaxController;
+use Slim\App;
 
 require_once __DIR__.'/../config.php';
 require_once __DIR__.'/../vendor/autoload.php';

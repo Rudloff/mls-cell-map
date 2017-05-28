@@ -2,6 +2,7 @@
 /**
  * AjaxController class.
  */
+
 namespace MlsCellMap\Controller;
 
 use Slim\Http\Request;
@@ -30,9 +31,9 @@ class AjaxController
     /**
      * Return cells in specified BBOX.
      *
-     * @param  Request  $request  PSR request
-     * @param  Response $response PSR response
-     * @param  array    $data     Request parameters
+     * @param Request  $request  PSR request
+     * @param Response $response PSR response
+     * @param array    $data     Request parameters
      *
      * @return Response
      */
@@ -122,9 +123,9 @@ class AjaxController
     /**
      * Get a cell by its ID.
      *
-     * @param  Request  $request  PSR request
-     * @param  Response $response PSR response
-     * @param  array    $data     Request parameters
+     * @param Request  $request  PSR request
+     * @param Response $response PSR response
+     * @param array    $data     Request parameters
      *
      * @return Response
      */
