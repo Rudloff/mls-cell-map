@@ -45,8 +45,8 @@ php /path/to/mls-cell-map/import_data.php > /path/to/mls-cell-map/cron.log
 
 ## Layers
 
-* Cells : estimated position and range of cells, based on collected data
-* Coverage : places where we have data
+* Cells: estimated position and range of cells, based on collected data
+* Coverage: places where we have data
 
 ## License
 
