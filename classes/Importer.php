@@ -1,4 +1,5 @@
 <?php
+
 namespace MlsCellMap;
 
 use League\CLImate\CLImate;
@@ -6,7 +7,6 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class Importer
 {
-
     private $climate;
     private $client;
     private $csvfile;
@@ -30,6 +30,7 @@ class Importer
         $process = $builder->getProcess();
         $process->run();
         preg_match('/^\s+\d+\s+(\d+)/m', $process->getOutput(), $matches);
+
         return (int) $matches[1];
     }
 
@@ -42,7 +43,7 @@ class Importer
             'MLS-full-cell-export-'.$date->format('Y-m-d').'T000000.csv.gz';
         $this->climate->info('Downloading data from '.$csvurl.'…');
         $response = $this->client->request('GET', $csvurl, [
-            'stream' => true
+            'stream' => true,
         ]);
         $length = $response->getHeader('Content-Length');
         $progress = $this->climate->progress()->total($length[0]);
@@ -63,7 +64,7 @@ class Importer
             die;
         }
         file_put_contents($this->csvfile, '');
-        $progress = $this->climate->progress()->total(Importer::getGzipFullsize($this->csvfile.'.gz'));
+        $progress = $this->climate->progress()->total(self::getGzipFullsize($this->csvfile.'.gz'));
         while (!gzeof($gzip)) {
             $data = gzread($gzip, 4096);
             file_put_contents($this->csvfile, $data, FILE_APPEND);
