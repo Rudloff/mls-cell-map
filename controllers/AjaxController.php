@@ -29,7 +29,7 @@ class AjaxController
     }
 
     /**
-     * Return cells in specified BBOX.
+     * Return cells in specified bounding box.
      *
      * @param Request  $request  PSR request
      * @param Response $response PSR response
@@ -40,6 +40,9 @@ class AjaxController
     public function get(Request $request, Response $response, array $data)
     {
         $bbox = explode(',', $data['bbox']);
+        if (count($bbox) != 4) {
+            throw new \Exception('The bounding box must contain four values.');
+        }
 
         $query = $this->pdo->prepare(
             "SELECT lon, lat, radio, mcc, cell, net, area, samples, `range`, created, updated
