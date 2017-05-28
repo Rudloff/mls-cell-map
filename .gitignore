@@ -1,5 +1,6 @@
 bower_components/
 config.php
-dist/
+dist/*
+!dist/images/
 node_modules/
 vendor/

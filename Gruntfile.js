@@ -4,7 +4,15 @@ module.exports = function (grunt) {
     grunt.initConfig(
         {
             uglify: {
-                combine: {
+                bower: {
+                    files: {
+                        'dist/bower.js': 'dist/_bower.js'
+                    },
+                    options: {
+                        sourceMap: true
+                    }
+                },
+                js: {
                     files: {
                         'dist/main.js': ['js/*.js']
                     },
@@ -14,9 +22,14 @@ module.exports = function (grunt) {
                 }
             },
             cssmin: {
-                combine: {
+                bower: {
                     files: {
-                        'dist/main.css': ['css/style.css']
+                        'dist/bower.css': 'dist/_bower.css'
+                    }
+                },
+                css: {
+                    files: {
+                        'dist/main.css': ['css/*.css']
                     }
                 }
             },
@@ -59,6 +72,28 @@ module.exports = function (grunt) {
                 php: {
                     src: ['*.php', 'ajax/*.php']
                 }
+            },
+            bower_concat: {
+                css: {
+                    dest: {
+                        'css': 'dist/_bower.css'
+                    },
+                    mainFiles: {
+                        'font-awesome': 'css/font-awesome.min.css'
+                    }
+                },
+                js: {
+                    dest: {
+                        'js': 'dist/_bower.js'
+                    },
+                    dependencies: {
+                        'Leaflet.MakiMarkers': 'leaflet'
+                    },
+                    mainFiles: {
+                        'leaflet-control-geocoder': 'dist/Control.Geocoder.js',
+                        'leaflet-plugins': 'control/Permalink.js'
+                    }
+                }
             }
         }
     );
@@ -70,7 +105,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-fixpack');
     grunt.loadNpmTasks('grunt-phpcs');
+    grunt.loadNpmTasks('grunt-bower-concat');
 
-    grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('default', ['bower_concat', 'uglify', 'cssmin']);
     grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
 };
