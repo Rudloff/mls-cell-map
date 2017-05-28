@@ -73,7 +73,7 @@ var cellMap = (function () {
 
     function getMarkers() {
         controlLoader.show();
-        L.Util.ajax('ajax/getCells.php?bbox=' + map.getBounds().toBBoxString())
+        L.Util.ajax('ajax/get/' + map.getBounds().toBBoxString())
             .then(showMarkers);
     }
 
@@ -97,10 +97,10 @@ var cellMap = (function () {
             },
             searchCell: function () {
                 L.Util.ajax(
-                    'ajax/searchCell.php?mcc=' + L.DomUtil.get('mcc').value +
-                        '&mnc=' + L.DomUtil.get('mnc').value +
-                        '&lac=' + L.DomUtil.get('lac').value +
-                        '&cell_id=' + L.DomUtil.get('cell_id').value
+                    'ajax/search/' + L.DomUtil.get('mcc').value +
+                        '/' + L.DomUtil.get('mnc').value +
+                        '/' + L.DomUtil.get('lac').value +
+                        '/' + L.DomUtil.get('cell_id').value
                 ).then(goToCell);
             },
             onAdd: function () {

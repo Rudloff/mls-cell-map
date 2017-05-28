@@ -5,7 +5,8 @@
   "require": {
     "league/climate": "~3.2.1",
     "guzzlehttp/guzzle": "~6.2.0",
-    "symfony/process": "~3.2.0"
+    "symfony/process": "~3.2.0",
+    "slim/slim": "~3.8.1"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.2.0",
@@ -21,7 +22,8 @@
   ],
   "autoload": {
     "psr-4": {
-      "MlsCellMap\\": "classes/"
+      "MlsCellMap\\": "classes/",
+      "MlsCellMap\\Controller\\": "controllers/"
     }
   }
 }

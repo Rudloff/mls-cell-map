@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                     bin: 'vendor/bin/phpcs'
                 },
                 php: {
-                    src: ['*.php', 'ajax/*.php', 'classes/*.php']
+                    src: ['*.php', 'ajax/*.php', 'classes/*.php', 'controllers/*.php']
                 }
             },
             bower_concat: {
