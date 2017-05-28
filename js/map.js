@@ -8,7 +8,8 @@ var cellMap = (function () {
     var map, markers, circle,
         addedPoints = [],
         mapInfo = new InfoControl({position: 'bottomright', content: '<a href="https://github.com/Rudloff/mls-cell-map" target="_blank">About this map</a>'}),
-        SearchCellControl;
+        SearchCellControl,
+        controlLoader = L.control.loader();
 
     function displayCircle(e) {
         if (circle) {
@@ -67,9 +68,11 @@ var cellMap = (function () {
                 }
             )
         );
+        controlLoader.hide();
     }
 
     function getMarkers() {
+        controlLoader.show();
         L.Util.ajax('ajax/getCells.php?bbox=' + map.getBounds().toBBoxString())
             .then(showMarkers);
     }
@@ -155,6 +158,7 @@ var cellMap = (function () {
                 ['U', 'UMTS'],
                 ['L', 'LTE']
             ];
+        controlLoader.addTo(map);
         markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 18 }).addTo(map);
         osm.addTo(map);
         coverage.addTo(map);
