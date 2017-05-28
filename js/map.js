@@ -161,8 +161,7 @@ var cellMap = (function () {
         controlLoader.addTo(map);
         markers = new L.MarkerClusterGroup({ disableClusteringAtZoom: 18 }).addTo(map);
         osm.addTo(map);
-        coverage.addTo(map);
-        L.control.layers({ 'OSM': osm }, { 'Coverage': coverage, 'Cells': markers }).addTo(map);
+        L.control.layers({ 'OSM': osm }, { 'MLS Coverage': coverage, 'Cells': markers }).addTo(map);
         map.on('moveend', getMarkers);
         getMarkers();
         map.addControl(
