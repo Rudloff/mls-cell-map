@@ -94,6 +94,13 @@ module.exports = function (grunt) {
                         'leaflet-plugins': 'control/Permalink.js'
                     }
                 }
+            },
+            phpdocumentor: {
+                doc: {
+                    options: {
+                        directory: 'classes/,controllers/,tests/'
+                    }
+                }
             }
         }
     );
@@ -106,7 +113,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-fixpack');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-bower-concat');
+    grunt.loadNpmTasks('grunt-phpdocumentor');
 
     grunt.registerTask('default', ['bower_concat', 'uglify', 'cssmin']);
     grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
+    grunt.registerTask('doc', ['phpdocumentor']);
 };

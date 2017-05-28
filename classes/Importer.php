@@ -1,17 +1,49 @@
 <?php
+/**
+ * Importer class.
+ */
 
 namespace MlsCellMap;
 
 use League\CLImate\CLImate;
 use Symfony\Component\Process\ProcessBuilder;
 
+/**
+ * Import cells data into our database.
+ */
 class Importer
 {
+    /**
+     * CLImate instance.
+     *
+     * @var CLImate
+     */
     private $climate;
+
+    /**
+     * Guzzle client instance.
+     *
+     * @var \GuzzleHttp\Client
+     */
     private $client;
+
+    /**
+     * Path to downloaded CSV file.
+     *
+     * @var string
+     */
     private $csvfile;
+
+    /**
+     * PDO instance.
+     *
+     * @var PDO
+     */
     private $pdo;
 
+    /**
+     * Importer class constructor.
+     */
     public function __construct()
     {
         $this->climate = new CLImate();
@@ -24,6 +56,13 @@ class Importer
         $this->pdo->exec("SET NAMES 'utf8';");
     }
 
+    /**
+     * Calculate the size of a gzip file.
+     *
+     * @param string $filename Filename
+     *
+     * @return int Size (in bytes)
+     */
     private function getGzipFullsize($filename)
     {
         $builder = new ProcessBuilder(['gzip', '-l', $filename]);
@@ -34,6 +73,11 @@ class Importer
         return (int) $matches[1];
     }
 
+    /**
+     * Download CSV data.
+     *
+     * @return void
+     */
     private function download()
     {
         $csv = fopen($this->csvfile.'.gz', 'w+');
@@ -54,6 +98,11 @@ class Importer
         fclose($csv);
     }
 
+    /**
+     * Uncompress CSV data.
+     *
+     * @return void
+     */
     private function uncompress()
     {
         $this->climate->info('Uncompressing data…');
@@ -73,6 +122,11 @@ class Importer
         gzclose($gzip);
     }
 
+    /**
+     * Delete existing SQL tables.
+     *
+     * @return void
+     */
     private function clearTables()
     {
         $this->climate->info('Deleting tables…');
@@ -84,6 +138,11 @@ class Importer
         $query->execute();
     }
 
+    /**
+     * Create SQL tables.
+     *
+     * @return void
+     */
     private function createTables()
     {
         $this->climate->info('Creating tables…');
@@ -93,6 +152,11 @@ class Importer
         $query->execute();
     }
 
+    /**
+     * Import cells data.
+     *
+     * @return void
+     */
     private function importCells()
     {
         $this->climate->info('Importing data…');
@@ -105,6 +169,11 @@ class Importer
         $query->execute();
     }
 
+    /**
+     * Import MNC data.
+     *
+     * @return void
+     */
     private function importMnc()
     {
         $query = $this->pdo->prepare(
@@ -127,6 +196,11 @@ class Importer
         }
     }
 
+    /**
+     * Import MCC data.
+     *
+     * @return void
+     */
     private function importMcc()
     {
         $query = $this->pdo->prepare(
@@ -159,6 +233,11 @@ class Importer
         }
     }
 
+    /**
+     * Write timestamp file.
+     *
+     * @return void
+     */
     private function writeTimestamp()
     {
         $this->climate->info('Writing timestamp…');
@@ -167,6 +246,11 @@ class Importer
         );
     }
 
+    /**
+     * Run importer.
+     *
+     * @return void
+     */
     public function run()
     {
         $this->download();

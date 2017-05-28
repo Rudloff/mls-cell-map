@@ -10,7 +10,8 @@
     "grunt-bower-concat": "~1.0.0",
     "grunt-cli": "~1.2.0",
     "grunt-contrib-cssmin": "~2.2.0",
-    "grunt-contrib-uglify": "~3.0.1"
+    "grunt-contrib-uglify": "~3.0.1",
+    "grunt-phpdocumentor": "~0.4.1"
   },
   "devDependencies": {
     "grunt-contrib-watch": "~1.0.0",

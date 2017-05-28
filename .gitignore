@@ -4,3 +4,4 @@ dist/*
 !dist/images/
 node_modules/
 vendor/
+docs/
