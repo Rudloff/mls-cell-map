@@ -12,7 +12,7 @@ You can contribute to the data by installing one the [client applications](https
 
 ## Install
 
-You first need to install [Bower](https://bower.io/) and [Grunt](https://gruntjs.com/).
+You first need to install [Composer](https://getcomposer.org/), [Bower](https://bower.io/) and [Grunt](https://gruntjs.com/).
 
 First you need to create the config file:
 
@@ -27,6 +27,7 @@ Then, you need to run the following shell commands:
 ```bash
 mkdir data
 chmod -R 777 data
+composer install
 php import_data.php
 bower install
 grunt
