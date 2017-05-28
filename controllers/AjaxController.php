@@ -26,6 +26,7 @@ class AjaxController
     public function __construct()
     {
         $this->pdo = new \PDO('mysql:dbname='.DBNAME.';host='.DBHOST.';port='.DBPORT, DBUSER, DBPASS);
+        $this->pdo->exec("SET NAMES 'utf8';");
     }
 
     /**
