@@ -78,7 +78,7 @@ var cellMap = (function () {
     }
 
     function showTimestamp(json) {
-        mapInfo.setContent(mapInfo.getContent() + ' (Last update: ' + json.date.substring(0, 10) + ')');
+        mapInfo.setContent(mapInfo.getContent() + ' (Latest update: ' + json.date.substring(0, 10) + ')');
     }
 
     function getTimestamp() {
