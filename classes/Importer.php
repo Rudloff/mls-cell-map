@@ -37,7 +37,7 @@ class Importer
     /**
      * PDO instance.
      *
-     * @var PDO
+     * @var \PDO
      */
     private $pdo;
 
