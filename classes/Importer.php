@@ -47,6 +47,25 @@ class Importer
     public function __construct()
     {
         $this->climate = new CLImate();
+        $this->climate->arguments->add([
+            'provider' => [
+                'longPrefix'   => 'provider',
+                'description'  => 'Data provider (can be <info>mls</info> or <info>opencellid</info>)',
+                'defaultValue' => 'mls',
+                'required'     => true
+            ],
+            'token' => [
+                'longPrefix'   => 'token',
+                'description'  => 'Token used to download on OpenCelliD',
+            ],
+            'help' => [
+                'prefix'      => 'h',
+                'longPrefix'  => 'help',
+                'description' => 'Prints a usage statement',
+                'noValue'     => true,
+            ]
+        ]);
+        $this->climate->description('Import CSV cell data');
         $this->client = new \GuzzleHttp\Client();
         $this->csvfile = __DIR__.'/../data/MLS-full-cell-export.csv';
         $this->pdo = new \PDO(
@@ -83,8 +102,24 @@ class Importer
         $csv = fopen($this->csvfile.'.gz', 'w+');
         $date = new \DateTime();
         $date->sub(new \DateInterval('P1D'));
-        $csvurl = 'https://d17pt8qph6ncyq.cloudfront.net/export/'.
-            'MLS-full-cell-export-'.$date->format('Y-m-d').'T000000.csv.gz';
+        switch ($this->climate->arguments->get('provider')) {
+            case 'opencellid':
+                $token = $this->climate->arguments->get('token');
+                if (!isset($token)) {
+                    $this->climate->error('You need to specify a token when using OpenCelliD.');
+                    die;
+                }
+                $csvurl = 'https://download.unwiredlabs.com/ocid/downloads'.
+                    '?token='.$token.'&file=cell_towers.csv.gz';
+                break;
+            case 'mls':
+                $csvurl = 'https://d17pt8qph6ncyq.cloudfront.net/export/'.
+                    'MLS-full-cell-export-'.$date->format('Y-m-d').'T000000.csv.gz';
+                break;
+            default:
+                $this->climate->error('Unknown provider');
+                die;
+        }
         $this->climate->info('Downloading data from '.$csvurl.'…');
         $response = $this->client->request('GET', $csvurl, [
             'stream' => true,
@@ -253,14 +288,19 @@ class Importer
      */
     public function run()
     {
-        $this->download();
-        $this->uncompress();
-        $this->clearTables();
-        $this->createTables();
-        $this->importCells();
-        $this->importMnc();
-        $this->importMcc();
-        $this->writeTimestamp();
-        $this->climate->shout('Done!');
+        $this->climate->arguments->parse();
+        if ($this->climate->arguments->defined('help')) {
+            $this->climate->usage();
+        } else {
+            $this->download();
+            $this->uncompress();
+            $this->clearTables();
+            $this->createTables();
+            $this->importCells();
+            $this->importMnc();
+            $this->importMcc();
+            $this->writeTimestamp();
+            $this->climate->shout('Done!');
+        }
     }
 }

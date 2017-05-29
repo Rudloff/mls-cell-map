@@ -54,6 +54,15 @@ php /path/to/mls-cell-map/import_data.php > /path/to/mls-cell-map/cron.log
 * Cells: estimated position and range of cells, based on collected data
 * Coverage: places where Mozilla Location Service has collected data
 
+## OpenCelliD
+
+You can use [OpenCelliD](https://opencellid.org/) as a provider instead of MLS.
+You just need to use these arguments when running the import script:
+
+```bash
+php import_data.php --provider opencellid --token [your opencellid token]
+```
+
 ## License
 
 This code is available under the [GNU General Public License](http://www.gnu.org/licenses/gpl.html).
