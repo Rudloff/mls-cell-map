@@ -52,7 +52,7 @@ class Importer
                 'longPrefix'   => 'provider',
                 'description'  => 'Data provider (can be <info>mls</info> or <info>opencellid</info>)',
                 'defaultValue' => 'mls',
-                'required'     => true
+                'required'     => true,
             ],
             'token' => [
                 'longPrefix'   => 'token',
@@ -63,7 +63,7 @@ class Importer
                 'longPrefix'  => 'help',
                 'description' => 'Prints a usage statement',
                 'noValue'     => true,
-            ]
+            ],
         ]);
         $this->climate->description('Import CSV cell data');
         $this->client = new \GuzzleHttp\Client();
