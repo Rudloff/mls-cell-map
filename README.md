@@ -20,7 +20,7 @@ First you need to create the config file:
 cp config.sample.php config.php
 ```
 
-And edit `config.php` with you MySQL config.
+And edit `config.php` with your MySQL config.
 
 Then, you need to run the following shell commands:
 
