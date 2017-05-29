@@ -10,6 +10,12 @@ It shows the estimated position of GSM cells, based on measurements provided by 
 
 You can contribute to the data by installing one the [client applications](https://location.services.mozilla.com/apps).
 
+## Requirements
+
+* [PHP](http://php.net/) >= 5
+* [MySQL](https://www.mysql.com/)
+* A web server that supports URL rewriting
+
 ## Install
 
 You first need to install [Composer](https://getcomposer.org/), [Bower](https://bower.io/) and [Grunt](https://gruntjs.com/).
