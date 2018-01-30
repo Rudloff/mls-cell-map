@@ -1,7 +1,7 @@
 {
   "name": "mls-cell-map",
   "description": "GSM cells map using Mozilla Location Service data",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/mls-cell-map/issues",
   "dependencies": {
