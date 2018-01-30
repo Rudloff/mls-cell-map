@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="bower_components/ionicons/css/ionicons.min.css" />
         <link rel="stylesheet" href="bower_components/leaflet-control-geocoder/Control.Geocoder.css" />
         <link rel="stylesheet" href="dist/main.css" />
+        <link rel="canonical" href="https://gsm-map.netlib.re/" />
         <meta name="description" content="This map shows the location of GSM cells, based on the measurement made by Mozilla Location Service." />
         <meta itemprop="description" content="This map shows the location of GSM cells, based on the measurement made by Mozilla Location Service." />
     </head>
